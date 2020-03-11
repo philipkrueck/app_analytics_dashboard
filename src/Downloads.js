@@ -93,38 +93,53 @@ function DownlaodsPlot(props) {
     );
 }
 
-const timeDurationOptions = {
-    week: "Woche",
-    month: "Monat",
-    year: "Jahr",
-    allTime: "Gesamt"
-}
-
-function TimeSelection() {
+function TimeSelection(props) {
     function handleSelectTimeDurationDidChange(e) {
-        console.log(e.target.value)
+        props.onChange(e.value);
     }
 
-    return (
-        <select onChange={handleSelectTimeDurationDidChange}>
-            <option value={timeDurationOptions.week}>{timeDurationOptions.week}</option>
-            <option value={timeDurationOptions.month}>{timeDurationOptions.month}</option>
-            <option value={timeDurationOptions.year}>{timeDurationOptions.year}</option>
-            <option value={timeDurationOptions.allTime}>{timeDurationOptions.allTime}</option>
-        </select>
+    return ( 
+        <div>
+            <h2>{props.currentTimeDuration}</h2>
+            <select onChange={handleSelectTimeDurationDidChange} defaultValue={props.currentTimeDuration}>
+                { props.timeDurationOptions.map((timeDuration) => {
+                    return (<option key={timeDuration}>{timeDuration}</option>)
+                })}
+            </select>
+        </div>
     );
 }
 
 function Downloads() {
-    const [currentTimeDuration, setCurrentTimeDuration] = useState(timeDurationOptions.week);
+    const timeDurationOptions = ["Woche", "Monat", "Jahr", "Gesamt"];
+    const [currentTimeDuration, setCurrentTimeDuration] = useState(timeDurationOptions[3]);
+
+    function timeSelectionDidChange(newValue) {
+        console.log(newValue)
+    }
 
     return (
         <div>
             <h1>Downloads</h1>
-            <TimeSelection currentTimeDuration={currentTimeDuration}/>
-            <DownlaodsPlot data={dataLastWeek} />
+            <TimeSelection currentTimeDuration={currentTimeDuration} timeDurationOptions={timeDurationOptions} onChange={() => timeSelectionDidChange()}/>
+            <DownlaodsPlot data={getData(currentTimeDuration, timeDurationOptions)} />
         </div>
     )
+}
+
+function getData(timeDuration, timeDurationOptions) {
+    switch (timeDuration) {
+        case timeDurationOptions[0]:
+            return dataLastWeek;
+        case timeDurationOptions[1]:
+            return dataLastMonth;
+        case timeDurationOptions[2]:
+            return data2020;
+        case timeDurationOptions[3]:
+            return data2019;
+        default:
+            break;
+    }
 }
 
 export default Downloads;
