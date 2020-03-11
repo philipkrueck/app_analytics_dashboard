@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../node_modules/react-vis/dist/style.css';
 import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines} from 'react-vis';
 
@@ -106,7 +106,7 @@ function TimeSelection() {
     }
 
     return (
-        <select onChange={() => handleSelectTimeDurationDidChange}>
+        <select onChange={handleSelectTimeDurationDidChange}>
             <option value={timeDurationOptions.week}>{timeDurationOptions.week}</option>
             <option value={timeDurationOptions.month}>{timeDurationOptions.month}</option>
             <option value={timeDurationOptions.year}>{timeDurationOptions.year}</option>
@@ -116,10 +116,12 @@ function TimeSelection() {
 }
 
 function Downloads() {
+    const [currentTimeDuration, setCurrentTimeDuration] = useState(timeDurationOptions.week);
+
     return (
         <div>
             <h1>Downloads</h1>
-            <TimeSelection />
+            <TimeSelection currentTimeDuration={currentTimeDuration}/>
             <DownlaodsPlot data={dataLastWeek} />
         </div>
     )
