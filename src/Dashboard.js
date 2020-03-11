@@ -8,7 +8,7 @@ import InAppPurchases from './InAppPurchases'
 
 function Dashboard() {
     const pages = ["Downloads", "Bewertungen", "Aktive Nutzer", "Nutzerverhalten", "Ranking", "In-App-Purchases", "Dashboard"];
-    const [selectedPage, setSelectedPage] = useState(pages[0]);
+    const [selectedPage, setSelectedPage] = useState(pages[6]);
 
     function handleSelectionChange(e) {
         setSelectedPage(e.target.value)
@@ -30,23 +30,24 @@ function Dashboard() {
                 return <InAppPurchases />
             case pages[6]: 
                 return (
+                <div id={"selectPages"}>
                     <h1>Dashboard</h1>
+                    <div><button value={pages[0]} onClick={handleSelectionChange}>Downloads</button></div>
+                    <div><button value={pages[1]} onClick={handleSelectionChange}>Bewertungen</button></div>
+                    <div><button value={pages[2]} onClick={handleSelectionChange}>Aktive Nutzer</button></div>
+                    <div><button value={pages[3]} onClick={handleSelectionChange}>Nutrzerverhalten</button></div>
+                    <div><button value={pages[4]} onClick={handleSelectionChange}>Ranking</button></div>
+                    <div><button value={pages[5]} onClick={handleSelectionChange}>In-App Purchases</button></div>
+                </div>
                 )
         }
     }
-
     return (
         <div>
-            <select id={"selectPages"} onChange={handleSelectionChange}>
-            <option value={pages[0]}>{pages[0]}</option>
-            <option value={pages[1]}>{pages[1]}</option>
-            <option value={pages[2]}>{pages[2]}</option>
-            <option value={pages[3]}>{pages[3]}</option>
-            <option value={pages[4]}>{pages[4]}</option>
-            <option value={pages[5]}>{pages[5]}</option>
-            <option value={pages[6]}>{pages[6]}</option>
-        </select>
-        {getPage()}
+            <div>
+                <button value={pages[6]} onClick={handleSelectionChange}>Return</button>
+            </div>
+            {getPage()}
         </div>
     );
 }
