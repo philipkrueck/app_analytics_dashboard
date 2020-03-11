@@ -95,7 +95,7 @@ function DownlaodsPlot(props) {
 
 function TimeSelection(props) {
     function handleSelectTimeDurationDidChange(e) {
-        props.onChange(e.value);
+        props.onChange(e.target.value);
     }
 
     return ( 
@@ -115,13 +115,13 @@ function Downloads() {
     const [currentTimeDuration, setCurrentTimeDuration] = useState(timeDurationOptions[3]);
 
     function timeSelectionDidChange(newValue) {
-        console.log(newValue)
+        setCurrentTimeDuration(newValue)
     }
 
     return (
         <div>
             <h1>Downloads</h1>
-            <TimeSelection currentTimeDuration={currentTimeDuration} timeDurationOptions={timeDurationOptions} onChange={() => timeSelectionDidChange()}/>
+            <TimeSelection currentTimeDuration={currentTimeDuration} timeDurationOptions={timeDurationOptions} onChange={(newValue) => timeSelectionDidChange(newValue)}/>
             <DownlaodsPlot data={getData(currentTimeDuration, timeDurationOptions)} />
         </div>
     )
