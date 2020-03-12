@@ -14,6 +14,16 @@ function Dashboard() {
         setSelectedPage(e.target.value)
     }
 
+    function backButton() {
+        if (selectedPage !== "Dashboard") {
+            return (
+                <div>
+                    <button value={pages[6]} onClick={handleSelectionChange}>Return</button>
+                </div>
+            );
+        }
+    }
+
     function getPage() {
         switch (selectedPage) {
             case pages[0]:
@@ -42,11 +52,10 @@ function Dashboard() {
                 )
         }
     }
+
     return (
         <div>
-            <div>
-                <button value={pages[6]} onClick={handleSelectionChange}>Return</button>
-            </div>
+            {backButton()}
             {getPage()}
         </div>
     );
