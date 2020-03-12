@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../node_modules/react-vis/dist/style.css';
 import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines} from 'react-vis';
+import TimeSelection from './TimeSelection';
 
 
 // MARK: constants
@@ -93,49 +94,33 @@ function DownlaodsPlot(props) {
     );
 }
 
-function TimeSelection(props) {
-    function handleSelectTimeDurationDidChange(e) {
-        props.onChange(e.target.value);
-    }
-
-    return ( 
-        <div>
-            <h2>{props.currentTimeDuration}</h2>
-            <select onChange={handleSelectTimeDurationDidChange} defaultValue={props.currentTimeDuration}>
-                { props.timeDurationOptions.map((timeDuration) => {
-                    return (<option key={timeDuration}>{timeDuration}</option>)
-                })}
-            </select>
-        </div>
-    );
-}
-
 function Downloads() {
-    const timeDurationOptions = ["Woche", "Monat", "Jahr", "Gesamt"];
-    const [currentTimeDuration, setCurrentTimeDuration] = useState(timeDurationOptions[3]);
+    const [dataToShow, setDataToShow] = useState(dataLastMonth);
 
-    function timeSelectionDidChange(newValue) {
-        setCurrentTimeDuration(newValue)
+    function timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod) {
+        setDataToShow(getData(selectedPeriod, selectedSpecificPeriod));
     }
 
     return (
         <div>
             <h1>Downloads</h1>
-            <TimeSelection currentTimeDuration={currentTimeDuration} timeDurationOptions={timeDurationOptions} onChange={(newValue) => timeSelectionDidChange(newValue)}/>
-            <DownlaodsPlot data={getData(currentTimeDuration, timeDurationOptions)} />
+            <div>
+                <TimeSelection onChange={(selectedPeriod, selectedSpecificPeriod) => timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod)}/>
+            </div>
+            <DownlaodsPlot data={dataToShow} />
         </div>
     )
 }
 
-function getData(timeDuration, timeDurationOptions) {
-    switch (timeDuration) {
-        case timeDurationOptions[0]:
+function getData(selectedPeriod, selectedSpecificPeriod) {
+    switch (selectedPeriod) {
+        case "Woche":
             return dataLastWeek;
-        case timeDurationOptions[1]:
+        case "Monat":
             return dataLastMonth;
-        case timeDurationOptions[2]:
+        case "Jahr":
             return data2020;
-        case timeDurationOptions[3]:
+        case "Gesamt":
             return data2019;
         default:
             break;
