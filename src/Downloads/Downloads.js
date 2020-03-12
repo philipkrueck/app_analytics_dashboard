@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../node_modules/react-vis/dist/style.css';
+import '../../node_modules/react-vis/dist/style.css';
 import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines} from 'react-vis';
-import TimeSelection from './TimeSelection';
+import TimeSelection from '../General/TimeSelection';
 
 
 // MARK: constants
