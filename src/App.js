@@ -6,7 +6,7 @@ import Dashboard from './Dashboard';
 
 function App() {
   return (
-    <Downloads /> // ToDo: change back to Dashboard
+    <Dashboard />
   );
 }
 
