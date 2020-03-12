@@ -11,3 +11,54 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Dashboard {
+  width: 85%;
+  height: 100%;
+  padding-left: 15%;
+}
+
+.DashboardHeading {
+  padding-left: 4%;
+}
+
+.DashboardKPI {
+  margin: 4%;
+  border: 1px;
+  border-color: black;
+  width: 25%;
+  height: 200px;
+  float: left;
+  position: relative;
+  border-style: solid;
+  border-color: black;
+}
+
+.DashboardKPI h4, p {
+  text-align: center;
+}
+
+.DashboardKPI img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70px;
+  height: 70px;
+}
+
+.DashboardButton {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: transparent;
+  color: black;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
