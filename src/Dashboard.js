@@ -5,12 +5,19 @@ import Reviews from './Reviews'
 import UserBehavior from './UserBehavior'
 import Ranking from './Ranking'
 import InAppPurchases from './InAppPurchases'
+import IconBewertung from './images/Bewertung.svg'
+import IconDownload from './images/Downloads.svg'
+import IconAktiveBenutzer from './images/Aktive Nutzer.svg'
+import IconInAppPurchases from './images/In-App-Purchases.svg'
+import IconRanking from './images/Ranking.svg'
+import IconNutzerverhalten from './images/Sessiondauer.svg'
 
 function Dashboard() {
     const pages = ["Downloads", "Bewertungen", "Aktive Nutzer", "Nutzerverhalten", "Ranking", "In-App-Purchases", "Dashboard"];
     const [selectedPage, setSelectedPage] = useState(pages[6]);
 
     function handleSelectionChange(e) {
+        console.log(e)
         setSelectedPage(e.target.value)
     }
 
@@ -25,6 +32,7 @@ function Dashboard() {
     }
 
     function getPage() {
+        // eslint-disable-next-line default-case
         switch (selectedPage) {
             case pages[0]:
                 return <Downloads />
@@ -40,16 +48,47 @@ function Dashboard() {
                 return <InAppPurchases />
             case pages[6]: 
                 return (
-                <div id={"selectPages"}>
-                    <h1>Dashboard</h1>
-                    <div><button value={pages[0]} onClick={handleSelectionChange}>Downloads</button></div>
-                    <div><button value={pages[1]} onClick={handleSelectionChange}>Bewertungen</button></div>
-                    <div><button value={pages[2]} onClick={handleSelectionChange}>Aktive Nutzer</button></div>
-                    <div><button value={pages[3]} onClick={handleSelectionChange}>Nutrzerverhalten</button></div>
-                    <div><button value={pages[4]} onClick={handleSelectionChange}>Ranking</button></div>
-                    <div><button value={pages[5]} onClick={handleSelectionChange}>In-App Purchases</button></div>
+                <div class={"Dashboard"} id={"selectPages"}>
+                    <h1 class={"DashboardHeading"}>Dashboard</h1>
+                    <h2 class={"DashboardHeading"}>Analytics</h2>
+                    <div class={"DashboardKPI"} >
+                        <h4>Downloads</h4>
+                        <img src={IconDownload}></img>
+                        <button class={"DashboardButton"} value={pages[0]} onClick={handleSelectionChange}></button>
+                        <p>test</p>
+                    </div>
+                    <div class={"DashboardKPI"} >
+                        <h4>Bewertung</h4>
+                        <img src={IconBewertung}></img>
+                        <button class={"DashboardButton"} value={pages[1]} onClick={handleSelectionChange}></button>
+                        <p>test</p>
+                    </div>
+                    <div class={"DashboardKPI"} >
+                        <h4>Aktive Nutzer</h4>
+                        <img src={IconAktiveBenutzer}></img>
+                        <button class={"DashboardButton"} value={pages[2]} onClick={handleSelectionChange}></button>
+                        <p>test</p>
+                    </div>
+                    <div class={"DashboardKPI"} >
+                        <h4>Nutzerverhalten</h4>
+                        <img src={IconNutzerverhalten}></img>
+                        <button class={"DashboardButton"} value={pages[3]} onClick={handleSelectionChange}></button>
+                        <p>3h 47min</p>
+                    </div>
+                    <div class={"DashboardKPI"} >
+                        <h4>Ranking</h4>
+                        <img src={IconRanking}></img>
+                        <button class={"DashboardButton"} value={pages[4]} onClick={handleSelectionChange}></button>
+                        <p>267</p>
+                    </div>
+                    <div class={"DashboardKPI"} >
+                        <h4>In-App Purchases</h4>
+                        <img src={IconInAppPurchases}></img>
+                        <button class={"DashboardButton"} value={pages[5]} onClick={handleSelectionChange}></button>
+                        <p>test</p>
+                    </div>
                 </div>
-                )
+            )
         }
     }
 

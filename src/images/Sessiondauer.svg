@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="122" height="145" viewBox="0 0 122 145">
+  <g id="Gruppe_65" data-name="Gruppe 65" transform="translate(-1275 -471)">
+    <g id="Gruppe_45" data-name="Gruppe 45" transform="translate(786.511 11)">
+      <g id="Ellipse_5" data-name="Ellipse 5" transform="translate(488.489 483)" fill="none" stroke="#39a6c1" stroke-width="3">
+        <circle cx="61" cy="61" r="61" stroke="none"/>
+        <circle cx="61" cy="61" r="59.5" fill="none"/>
+      </g>
+      <path id="Pfad_19" data-name="Pfad 19" d="M2491.335,6000.852l-9.835-10.282,12.07-12.07,10.54,10.86" transform="translate(-1990.371 -5492.86)" fill="none" stroke="#39a6c1" stroke-width="3"/>
+      <path id="Pfad_20" data-name="Pfad 20" d="M2534.812,5974.3v-11.623H2529V5951.5h30.846v11.176h-6.259V5974.3" transform="translate(-1995.402 -5490)" fill="none" stroke="#39a6c1" stroke-width="3"/>
+      <path id="Pfad_21" data-name="Pfad 21" d="M9.835,22.352,0,12.07,12.07,0,22.437,10.842" transform="translate(607.581 486.313) rotate(90)" fill="none" stroke="#39a6c1" stroke-width="3"/>
+    </g>
+    <text id="_3h_43min" data-name="3h 43min" transform="translate(1286 560)" fill="#fff" font-size="30" font-family="SegoeCondensed, Segoe"><tspan x="0" y="0">3h 43min</tspan></text>
+  </g>
+</svg>
