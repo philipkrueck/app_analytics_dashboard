@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
-import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines} from 'react-vis';
+import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, HorizontalBarSeries, VerticalBarSeries} from 'react-vis';
 import TimeSelection from '../General/TimeSelection';
+import SegmentedControl from '../General/SegmentedControl'
 
 
 // MARK: constants
@@ -80,34 +81,67 @@ const dataLastMonth = [
 
 
 
-
+function seriesGraph(configuration) {
+    switch (configuration.selectedChartType) {
+        case "bar-chart":
+            return (<VerticalBarSeries data={configuration.data}></VerticalBarSeries>)
+        case "line-chart":
+            return (<LineSeries data={configuration.data}></LineSeries>)
+    }
+}
 
 function DownlaodsPlot(props) {
     return (
         <XYPlot height={300} width={600} >
-            <XAxis />
-            <YAxis />
+            <XAxis title={props.chartConfiguration.xAxisLabel} />
+            <YAxis title={'Downloads'}/>
             <HorizontalGridLines />
             <VerticalGridLines />
-            <LineSeries data={props.data}></LineSeries>
+            {seriesGraph(props.chartConfiguration)}
         </XYPlot>
     );
 }
 
+const timePeriodOptions = {
+
+}
+
 function Downloads() {
-    const [dataToShow, setDataToShow] = useState(dataLastMonth);
+
+    const [chartConfiguration, setChartConfiguration] = useState({
+        data: data2019,
+        chartTypes: ["bar-chart", "line-chart"],
+        selectedChartType: "line-chart", 
+        xAxisLabel: "Monat"
+    });
 
     function timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod) {
-        setDataToShow(getData(selectedPeriod, selectedSpecificPeriod));
+        setChartConfiguration({
+            data: getData(selectedPeriod, selectedSpecificPeriod),
+            chartTypes: chartConfiguration.chartTypes,
+            selectedChartType: chartConfiguration.selectedChartType, 
+            xAxisLabel: selectedPeriod
+        })
     }
 
+    function segmentedControlDidChange(newType) {
+        setChartConfiguration({
+            data: chartConfiguration.data,
+            chartTypes: chartConfiguration.chartTypes,
+            selectedChartType: newType,
+            xAxisLabel: "Monat"
+        })
+    }
+
+    console.log(chartConfiguration.xAxisLabel);
     return (
         <div>
             <h1>Downloads</h1>
             <div>
-                <TimeSelection onChange={(selectedPeriod, selectedSpecificPeriod) => timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod)}/>
+                <TimeSelection  onChange={(selectedPeriod, selectedSpecificPeriod) => timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod)}/>
             </div>
-            <DownlaodsPlot data={dataToShow} />
+            <SegmentedControl controls={chartConfiguration.chartTypes} selectedControl={chartConfiguration.selectedChartType} onChange={(e) => segmentedControlDidChange(e)} />
+            <DownlaodsPlot chartConfiguration={chartConfiguration} />
         </div>
     )
 }

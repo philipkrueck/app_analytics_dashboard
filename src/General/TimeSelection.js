@@ -23,7 +23,7 @@ function TimeSelection(props) {
 
     useEffect(() => {
         props.onChange(selectedPeriod, selectedSpecificPeriod);
-    });
+    }, [selectedPeriod, selectedSpecificPeriod]);
     
 
     function periodSelectionDidChange(newValue) {

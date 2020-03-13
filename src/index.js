@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './General/index.css';
-import Dashboard from './Dashboard/Dashboard';
+import Downloads from './Downloads/Downloads';
 
 function App() {
   return (
-    <Dashboard />
+    <Downloads />
   );
 }
 
