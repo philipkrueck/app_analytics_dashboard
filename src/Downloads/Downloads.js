@@ -132,14 +132,15 @@ function Downloads() {
             xAxisLabel: "Monat"
         })
     }
-
-    console.log(chartConfiguration.xAxisLabel);
     return (
         <div>
             <h1>Downloads</h1>
-            <div>
-                <TimeSelection  onChange={(selectedPeriod, selectedSpecificPeriod) => timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod)}/>
+            <div>   
+            <h4>{accumulateValues(chartConfiguration.data)}</h4>
+            <h4>Delta Component</h4>
+            <h4>Zeitraum</h4>
             </div>
+            <TimeSelection  onChange={(selectedPeriod, selectedSpecificPeriod) => timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod)}/>
             <SegmentedControl controls={chartConfiguration.chartTypes} selectedControl={chartConfiguration.selectedChartType} onChange={(e) => segmentedControlDidChange(e)} />
             <DownlaodsPlot chartConfiguration={chartConfiguration} />
         </div>
@@ -159,6 +160,16 @@ function getData(selectedPeriod, selectedSpecificPeriod) {
         default:
             break;
     }
+}
+
+function accumulateValues(data) {
+    console.log(data);
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+        console.log(data[i])
+        sum += data[i].y
+    }
+    return sum;
 }
 
 export default Downloads;
