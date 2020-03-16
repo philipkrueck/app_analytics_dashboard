@@ -5,15 +5,13 @@ import Reviews from '../Reviews/Reviews'
 import UserBehavior from '../User Behavior/UserBehavior'
 import Ranking from '../Ranking/Ranking'
 import InAppPurchases from '../In-App Purchases/InAppPurchases'
+import DeltaComponent from '../General/DeltaComponent'
 import IconBewertung from '../General/images/Bewertung.svg'
 import IconDownload from '../General/images/Downloads.svg'
 import IconAktiveBenutzer from '../General/images/Aktive Nutzer.svg'
 import IconInAppPurchases from '../General/images/In-App-Purchases.svg'
 import IconRanking from '../General/images/Ranking.svg'
 import IconNutzerverhalten from '../General/images/Sessiondauer.svg'
-import IconDeltaPos from '../General/images/Delta_positiv.svg'
-import IconDeltaNeg from '../General/images/Delta_negativ.svg'
-import IconDeltaNeutral from '../General/images/neutral.svg'
 
 function Dashboard() {
     const pages = ["Downloads", "Bewertungen", "Aktive Nutzer", "Nutzerverhalten", "Ranking", "In-App-Purchases", "Dashboard"];
@@ -35,36 +33,6 @@ function Dashboard() {
             );
         }
     }
-
-    
-
-    function DeltaComponent(props) {
-        if(props.percentageValue === 0) {
-            return (
-                <div class={"DeltaComponent"}>
-                    <p>{shuffledDownloads}</p>
-                    <p><img src={IconDeltaNeutral}></img></p>
-                    <p>{props.percentageValue}</p>
-                </div>
-            )     
-        } else if(props.percentageValue < 0) {
-            return (
-                <div class={"DeltaComponent"}>
-                    <p>{shuffledDownloads}</p>
-                    <p><img src={IconDeltaNeg}></img></p>
-                    <p>{props.percentageValue}</p>
-                </div>
-            )
-        }
-        return (
-            <div class={"DeltaComponent"}>
-                <p>{shuffledDownloads}</p>
-                <p><img src={IconDeltaPos}></img></p>
-                <p>{props.percentageValue}</p>
-            </div>
-        )
-    }
-
 
     function getPage() {
         // eslint-disable-next-line default-case
@@ -90,7 +58,10 @@ function Dashboard() {
                         <h4>Downloads</h4>
                         <img src={IconDownload}></img>
                         <button class={"DashboardButton"} value={pages[0]} onClick={handleSelectionChange}></button>
-                        <DeltaComponent percentageValue={0.01}/>
+                        <div id="delta-component">
+                            <DeltaComponent percentageValue={0.01}/>
+                            <p>{shuffledDownloads}</p>
+                        </div>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Bewertung</h4>
