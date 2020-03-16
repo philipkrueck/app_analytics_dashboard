@@ -11,10 +11,15 @@ import IconAktiveBenutzer from '../General/images/Aktive Nutzer.svg'
 import IconInAppPurchases from '../General/images/In-App-Purchases.svg'
 import IconRanking from '../General/images/Ranking.svg'
 import IconNutzerverhalten from '../General/images/Sessiondauer.svg'
+import IconDeltaPos from '../General/images/Delta_positiv.svg'
+import IconDeltaNeg from '../General/images/Delta_negativ.svg'
+import IconDeltaNeutral from '../General/images/neutral.svg'
 
 function Dashboard() {
     const pages = ["Downloads", "Bewertungen", "Aktive Nutzer", "Nutzerverhalten", "Ranking", "In-App-Purchases", "Dashboard"];
     const [selectedPage, setSelectedPage] = useState(pages[6]);
+    const DummyData = ["64582438", "97346328", "836276", "99732548234"];
+    const shuffledDownloads = DummyData[Math.floor(Math.random()*DummyData.length)];
 
     function handleSelectionChange(e) {
         console.log(e)
@@ -31,6 +36,36 @@ function Dashboard() {
         }
     }
 
+    
+
+    function DeltaComponent(props) {
+        if(props.percentageValue === 0) {
+            return (
+                <div class={"DeltaComponent"}>
+                    <p>{shuffledDownloads}</p>
+                    <p><img src={IconDeltaNeutral}></img></p>
+                    <p>{props.percentageValue}</p>
+                </div>
+            )     
+        } else if(props.percentageValue < 0) {
+            return (
+                <div class={"DeltaComponent"}>
+                    <p>{shuffledDownloads}</p>
+                    <p><img src={IconDeltaNeg}></img></p>
+                    <p>{props.percentageValue}</p>
+                </div>
+            )
+        }
+        return (
+            <div class={"DeltaComponent"}>
+                <p>{shuffledDownloads}</p>
+                <p><img src={IconDeltaPos}></img></p>
+                <p>{props.percentageValue}</p>
+            </div>
+        )
+    }
+
+
     function getPage() {
         // eslint-disable-next-line default-case
         switch (selectedPage) {
@@ -46,7 +81,7 @@ function Dashboard() {
                 return <Ranking />
             case pages[5]:
                 return <InAppPurchases />
-            case pages[6]: 
+            case pages[6]:
                 return (
                 <div class={"Dashboard"} id={"selectPages"}>
                     <h1 class={"DashboardHeading"}>Dashboard</h1>
@@ -55,7 +90,7 @@ function Dashboard() {
                         <h4>Downloads</h4>
                         <img src={IconDownload}></img>
                         <button class={"DashboardButton"} value={pages[0]} onClick={handleSelectionChange}></button>
-                        <p>test</p>
+                        <DeltaComponent percentageValue={0.01}/>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Bewertung</h4>
