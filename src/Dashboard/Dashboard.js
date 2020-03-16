@@ -16,8 +16,12 @@ import IconNutzerverhalten from '../General/images/Sessiondauer.svg'
 function Dashboard() {
     const pages = ["Downloads", "Bewertungen", "Aktive Nutzer", "Nutzerverhalten", "Ranking", "In-App-Purchases", "Dashboard"];
     const [selectedPage, setSelectedPage] = useState(pages[6]);
-    const DummyData = ["64582438", "97346328", "836276", "99732548234"];
-    const shuffledDownloads = DummyData[Math.floor(Math.random()*DummyData.length)];
+    const DummyDataDownloads = ["64582438", "97346328", "836276", "99732544"];
+    const shuffledDownloads = DummyDataDownloads[Math.floor(Math.random()*DummyDataDownloads.length)];
+    const DummyDataActiveUsers = ["8732 WAU", "1000 WAU", "733 WAU"];
+    const shuffledActiveUsers = DummyDataActiveUsers[Math.floor(Math.random()*DummyDataActiveUsers.length)];
+    const DummyDataInAppPurchases = ["659,73 €", "892,09 €", "9922,81 €"];
+    const shuffledInAppPurchases = DummyDataInAppPurchases[Math.floor(Math.random()*DummyDataInAppPurchases.length)];
 
     function handleSelectionChange(e) {
         console.log(e)
@@ -58,9 +62,9 @@ function Dashboard() {
                         <h4>Downloads</h4>
                         <img src={IconDownload}></img>
                         <button class={"DashboardButton"} value={pages[0]} onClick={handleSelectionChange}></button>
-                        <div id="delta-component">
-                            <DeltaComponent percentageValue={0.01}/>
+                        <div class={"DeltaComponent"} id="delta-component">
                             <p>{shuffledDownloads}</p>
+                            <DeltaComponent percentageValue={0.01}/>
                         </div>
                     </div>
                     <div class={"DashboardKPI"} >
@@ -73,7 +77,10 @@ function Dashboard() {
                         <h4>Aktive Nutzer</h4>
                         <img src={IconAktiveBenutzer}></img>
                         <button class={"DashboardButton"} value={pages[2]} onClick={handleSelectionChange}></button>
-                        <p>test</p>
+                        <div class={"DeltaComponent"} id="delta-component">
+                            <p>{shuffledActiveUsers}</p>
+                            <DeltaComponent percentageValue={-1.2}/>
+                        </div>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Nutzerverhalten</h4>
@@ -91,7 +98,10 @@ function Dashboard() {
                         <h4>In-App Purchases</h4>
                         <img src={IconInAppPurchases}></img>
                         <button class={"DashboardButton"} value={pages[5]} onClick={handleSelectionChange}></button>
-                        <p>test</p>
+                        <div class={"DeltaComponent"} id="delta-component">
+                            <p>{shuffledInAppPurchases}</p>
+                            <DeltaComponent percentageValue={0.0}/>
+                        </div>
                     </div>
                 </div>
             )

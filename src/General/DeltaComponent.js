@@ -6,21 +6,21 @@ import IconDeltaNeutral from './images/neutral.svg'
 export default function DeltaComponent(props) {
     if(props.percentageValue === 0) {
         return (
-            <div class={"DeltaComponent"}>
+            <div>
                 <p><img src={IconDeltaNeutral}></img></p>
                 <p>{props.percentageValue}</p>
             </div>
         )     
     } else if(props.percentageValue < 0) {
         return (
-            <div class={"DeltaComponent"}>
+            <div>
                 <p><img src={IconDeltaNeg}></img></p>
                 <p>{props.percentageValue}</p>
             </div>
         )
     }
     return (
-        <div class={"DeltaComponent"}>
+        <div>
             <p><img src={IconDeltaPos}></img></p>
             <p>{props.percentageValue}</p>
         </div>
