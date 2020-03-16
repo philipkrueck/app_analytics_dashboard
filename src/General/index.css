@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #1B1B1B;
+  color: #FFFFFF;
 }
 
 code {
@@ -30,8 +32,7 @@ code {
   height: 200px;
   float: left;
   position: relative;
-  border-style: solid;
-  border-color: black;
+  background: #313131
 }
 
 .DashboardKPI h4, p {
@@ -79,3 +80,67 @@ code {
   padding-top: 5px;
   padding-left: 5px;
 }
+
+.ActiveUsersGraph {
+  float: left;
+  padding-top: 30px;
+  width: 65%;
+  height: 550px;
+}
+
+.ActiveUsers {
+  float: left;
+  width: 35%;
+}
+
+.ActiveUsersBubble {
+  width: 120px;
+  height: 120px;
+  border-radius: 75px;
+  background: #39A6C1;
+}
+
+.ActiveUsersBubble p {
+  font-size: 13px;
+  padding: 27px;
+  padding-top: 32px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.ActiveUsersDeltaComponent {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
+
+.ActiveUsersDeltaComponent p {
+  float: left;
+  padding-left: 5px;
+}
+
+.ActiveUsersDeltaComponent img {
+  width: 12px;
+  height: 12px;
+  padding-top: 5px;
+  padding-left: 5px;
+}
+.sternebewertung{
+  margin-left: 35px;
+}
+
+.sternebewertung p{
+  color: #39A6C1;
+  text-align: center;
+}
+
+ .sternebewertung img {
+  padding-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40px;
+  height: 40px;
+  float: left;
+ }
+ 
