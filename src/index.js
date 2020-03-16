@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './General/index.css';
 import Downloads from './Downloads/Downloads';
-import TimeSelection from './Downloads/TimeSelection';
-import JWTCreation from './Downloads/JWTCreation';
+import TimeSelection from './General/TimeSelection';
+import Dashboard from './Dashboard/Dashboard';
 
 function App() {
   return (
-    <JWTCreation />
+    <Downloads />
   );
 }
 

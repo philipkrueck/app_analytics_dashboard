@@ -1,85 +1,10 @@
 import React, { useState } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
-import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, HorizontalBarSeries, VerticalBarSeries} from 'react-vis';
+import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries} from 'react-vis';
 import TimeSelection from '../General/TimeSelection';
 import SegmentedControl from '../General/SegmentedControl'
-
-
-// MARK: constants
-const data2020 = [
-    {x: 0, y: 8},
-    {x: 1, y: 5},
-    {x: 2, y: 4},
-    {x: 3, y: 9},
-    {x: 4, y: 1},
-    {x: 5, y: 7},
-    {x: 6, y: 6},
-    {x: 7, y: 3},
-    {x: 8, y: 2},
-    {x: 9, y: 0},
-    {x: 10, y: 0},
-    {x: 11, y: 0}
-  ];
-
-const data2019 = [
-    {x: 0, y: 3},
-    {x: 1, y: 2},
-    {x: 2, y: 9},
-    {x: 3, y: 10},
-    {x: 4, y: 15},
-    {x: 5, y: 9},
-    {x: 6, y: 6},
-    {x: 7, y: 3},
-    {x: 8, y: 2},
-    {x: 9, y: 0},
-    {x: 10, y: 3},
-    {x: 11, y: 1}
-];
-
-const dataLastWeek = [
-    {x: 0, y: 3},
-    {x: 1, y: 2},
-    {x: 2, y: 9},
-    {x: 3, y: 10},
-    {x: 4, y: 15},
-    {x: 5, y: 9},
-    {x: 6, y: 6}
-]
-
-const dataLastMonth = [
-    {x: 0, y: 3},
-    {x: 1, y: 2},
-    {x: 2, y: 9},
-    {x: 3, y: 10},
-    {x: 4, y: 15},
-    {x: 5, y: 9},
-    {x: 6, y: 6},
-    {x: 7, y: 3},
-    {x: 8, y: 2},
-    {x: 9, y: 9},
-    {x: 10, y: 10},
-    {x: 11, y: 15},
-    {x: 12, y: 9},
-    {x: 13, y: 3},
-    {x: 14, y: 2},
-    {x: 15, y: 9},
-    {x: 16, y: 10},
-    {x: 17, y: 15},
-    {x: 18, y: 9},
-    {x: 19, y: 3},
-    {x: 20, y: 2},
-    {x: 21, y: 9},
-    {x: 22, y: 10},
-    {x: 23, y: 15},
-    {x: 24, y: 9},
-    {x: 25, y: 6},
-    {x: 26, y: 3},
-    {x: 27, y: 2},
-    {x: 28, y: 9}
-]
-
-
-
+import * as DownloadsData from './DownloadData'
+import { dataLastWeek } from './DownloadData';
 
 function seriesGraph(configuration) {
     switch (configuration.selectedChartType) {
@@ -102,14 +27,10 @@ function DownlaodsPlot(props) {
     );
 }
 
-const timePeriodOptions = {
-
-}
-
 function Downloads() {
 
     const [chartConfiguration, setChartConfiguration] = useState({
-        data: data2019,
+        data: DownloadsData.data2019,
         chartTypes: ["bar-chart", "line-chart"],
         selectedChartType: "line-chart", 
         xAxisLabel: "Monat"
@@ -140,7 +61,7 @@ function Downloads() {
             <h4>Delta Component</h4>
             <h4>Zeitraum</h4>
             </div>
-            <TimeSelection  onChange={(selectedPeriod, selectedSpecificPeriod) => timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod)}/>
+            <TimeSelection />
             <SegmentedControl controls={chartConfiguration.chartTypes} selectedControl={chartConfiguration.selectedChartType} onChange={(e) => segmentedControlDidChange(e)} />
             <DownlaodsPlot chartConfiguration={chartConfiguration} />
         </div>
@@ -150,13 +71,13 @@ function Downloads() {
 function getData(selectedPeriod, selectedSpecificPeriod) {
     switch (selectedPeriod) {
         case "Woche":
-            return dataLastWeek;
+            return DownloadsData.dataLastWeek;
         case "Monat":
-            return dataLastMonth;
+            return DownloadsData.dataLastMonth;
         case "Jahr":
-            return data2020;
+            return DownloadsData.data2020;
         case "Gesamt":
-            return data2019;
+            return DownloadsData.data2019;
         default:
             break;
     }
