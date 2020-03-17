@@ -139,3 +139,44 @@ code {
   float: left;
  }
  
+ .IconRanking {
+  position: relative;
+  text-align: left;
+  color: white;
+ }
+
+ .IconRanking div {
+   margin: 0px;
+   padding: 0px;
+ }
+
+.RankingInImage1 {
+  position: absolute;
+  top: 25%;
+  left: 15%;
+  transform: translate(-20%, -20%);
+  color: #39A6C1;
+  font-size: 22px;
+}
+
+.RankingInImage2 {
+  position: absolute;
+  top: 50%;
+  left: 16%;
+  transform: translate(-40%, -50%);
+  color: #39A6C1;
+  float: left;
+  font-size: 10px;
+}
+.RankingInImage2 img {
+  height: 10px;
+  width: 10px;
+  float: left;
+  padding: 2px;
+}
+
+.RankingInImage2 p {
+  padding: 0px;
+  margin-top: 0px;
+  float: left;
+}
