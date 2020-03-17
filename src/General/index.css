@@ -82,16 +82,18 @@ code {
 }
 
 .ActiveUsersGraph {
-  float: left;
   padding-top: 30px;
-  width: 65%;
   height: 550px;
+  float: left;
+  width: auto;
 }
 
 .ActiveUsers {
   float: left;
-  width: 35%;
+  width: 30%;
+  margin-left: 30px;
 }
+
 
 .ActiveUsersBubble {
   width: 120px;
@@ -102,8 +104,7 @@ code {
 
 .ActiveUsersBubble p {
   font-size: 13px;
-  padding: 27px;
-  padding-top: 32px;
+  padding: 28px;
   text-align: center;
   color: #FFFFFF;
 }
@@ -111,7 +112,6 @@ code {
 .ActiveUsersDeltaComponent {
   display: flex;
   justify-content: left;
-  align-items: left;
 }
 
 .ActiveUsersDeltaComponent p {
@@ -126,19 +126,14 @@ code {
   padding-left: 5px;
 }
 .sternebewertung{
-  margin-left: 35px;
-}
-
-.sternebewertung p{
-  color: #39A6C1;
-  text-align: center;
+  display: flex;
+  justify-content: left;
 }
 
  .sternebewertung img {
-  padding-top: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   width: 40px;
   height: 40px;
   float: left;

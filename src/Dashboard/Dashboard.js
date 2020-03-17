@@ -75,9 +75,10 @@ function Dashboard() {
                             <img src={IconBewertung}/>
                             <img src={IconBewertung}/>
                             <img src={IconBewertung}/>
-                            <img src={IconBewertungLeer}/><br></br>
+                            <img src={IconBewertungLeer}/>
                         </div>
                         <button class={"DashboardButton"} value={pages[1]} onClick={handleSelectionChange}></button>
+                        <p>4 Sterne</p>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Aktive Nutzer</h4>
