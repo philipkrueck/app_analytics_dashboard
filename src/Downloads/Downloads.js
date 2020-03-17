@@ -87,8 +87,6 @@ function DownlaodsPlot(props) {
         <XYPlot height={300} width={600} >
             <XAxis />
             <YAxis />
-            <HorizontalGridLines />
-            <VerticalGridLines />
             <LineSeries data={props.data}></LineSeries>
         </XYPlot>
     );

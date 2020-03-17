@@ -12,6 +12,7 @@ import IconAktiveBenutzer from '../General/images/Aktive Nutzer.svg'
 import IconInAppPurchases from '../General/images/In-App-Purchases.svg'
 import IconRanking from '../General/images/Ranking.svg'
 import IconNutzerverhalten from '../General/images/Sessiondauer.svg'
+import IconBewertungLeer from '../General/images/Bewertung - nicht ausgefüllt.svg'
 
 function Dashboard() {
     const pages = ["Downloads", "Bewertungen", "Aktive Nutzer", "Nutzerverhalten", "Ranking", "In-App-Purchases", "Dashboard"];
@@ -69,9 +70,15 @@ function Dashboard() {
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Bewertung</h4>
-                        <img src={IconBewertung}></img>
+                        <div class={"sternebewertung"}>
+                            <img src={IconBewertung}/>
+                            <img src={IconBewertung}/>
+                            <img src={IconBewertung}/>
+                            <img src={IconBewertung}/>
+                            <img src={IconBewertungLeer}/>
+                        </div>
                         <button class={"DashboardButton"} value={pages[1]} onClick={handleSelectionChange}></button>
-                        <p>test</p>
+                        <p>4 Sterne</p>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Aktive Nutzer</h4>
