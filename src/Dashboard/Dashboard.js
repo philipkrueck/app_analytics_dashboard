@@ -6,13 +6,12 @@ import UserBehavior from '../User Behavior/UserBehavior'
 import Ranking from '../Ranking/Ranking'
 import InAppPurchases from '../In-App Purchases/InAppPurchases'
 import DeltaComponent from '../General/DeltaComponent'
-import IconBewertung from '../General/images/Bewertung.svg'
 import IconDownload from '../General/images/Downloads.svg'
 import IconAktiveBenutzer from '../General/images/Aktive Nutzer.svg'
 import IconInAppPurchases from '../General/images/In-App-Purchases.svg'
 import IconRanking from '../General/images/Ranking.svg'
 import IconNutzerverhalten from '../General/images/Sessiondauer.svg'
-import IconBewertungLeer from '../General/images/Bewertung - nicht ausgefüllt.svg'
+import StarComponent from '../General/StarComponent'
 
 function Dashboard() {
     const pages = ["Downloads", "Bewertungen", "Aktive Nutzer", "Nutzerverhalten", "Ranking", "In-App-Purchases", "Dashboard"];
@@ -23,6 +22,8 @@ function Dashboard() {
     const shuffledActiveUsers = DummyDataActiveUsers[Math.floor(Math.random()*DummyDataActiveUsers.length)];
     const DummyDataInAppPurchases = ["659,73 €", "892,09 €", "9922,81 €"];
     const shuffledInAppPurchases = DummyDataInAppPurchases[Math.floor(Math.random()*DummyDataInAppPurchases.length)];
+    const DummyDataStars = ["3.66", "3.84", "4.09", "4.45"];
+    const shuffledStars = DummyDataStars[Math.floor(Math.random()*DummyDataStars.length)];
 
     function handleSelectionChange(e) {
         console.log(e)
@@ -65,20 +66,14 @@ function Dashboard() {
                         <button class={"DashboardButton"} value={pages[0]} onClick={handleSelectionChange}></button>
                         <div class={"DeltaComponent"} id="delta-component">
                             <p>{shuffledDownloads}</p>
-                            <DeltaComponent percentageValue={0.01}/>
+                            <DeltaComponent percentageValue={shuffledStars}/>
                         </div>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Bewertung</h4>
-                        <div class={"sternebewertung"}>
-                            <img src={IconBewertung}/>
-                            <img src={IconBewertung}/>
-                            <img src={IconBewertung}/>
-                            <img src={IconBewertung}/>
-                            <img src={IconBewertungLeer}/>
-                        </div>
+                        <StarComponent percentageStars={shuffledStars}/>
                         <button class={"DashboardButton"} value={pages[1]} onClick={handleSelectionChange}></button>
-                        <p>4 Sterne</p>
+                        <p>{shuffledStars} Sterne</p>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Aktive Nutzer</h4>
