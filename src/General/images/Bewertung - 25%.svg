@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="55.453" height="55.198" viewBox="0 0 55.453 55.198">
+  <g id="Gruppe_156" data-name="Gruppe 156" transform="translate(2.662 2.941)">
+    <g id="Gruppe_153" data-name="Gruppe 153" transform="translate(18.456 0)">
+      <path id="star" d="M0,18.834,6.56,0l7.063,18.834h18.05L18.082,30.725l7.312,19.5L6.56,40.807,0,43.656Z" transform="translate(0)" fill="none" stroke="#39a6c1" stroke-width="2"/>
+    </g>
+    <path id="star-2" data-name="star" d="M31.592,18.834h18.05l.583,24.885-12.354,6.5,7.312-19.5Z" transform="translate(-31.592 -0.204)" fill="#39a6c1" stroke="#39a6c1" stroke-width="2"/>
+  </g>
+</svg>
