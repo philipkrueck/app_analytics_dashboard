@@ -1,111 +1,74 @@
 import React, { useState } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
-import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines} from 'react-vis';
+import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries} from 'react-vis';
 import TimeSelection from '../General/TimeSelection';
+import {getFullPeriodDateRange} from '../General/TimeSelection';
+import SegmentedControl from '../General/SegmentedControl';
+import * as DownloadsData from "./DownloadsData";
+import moment from 'moment';
 
 
-// MARK: constants
-const data2020 = [
-    {x: 0, y: 8},
-    {x: 1, y: 5},
-    {x: 2, y: 4},
-    {x: 3, y: 9},
-    {x: 4, y: 1},
-    {x: 5, y: 7},
-    {x: 6, y: 6},
-    {x: 7, y: 3},
-    {x: 8, y: 2},
-    {x: 9, y: 0},
-    {x: 10, y: 0},
-    {x: 11, y: 0}
-  ];
-
-const data2019 = [
-    {x: 0, y: 3},
-    {x: 1, y: 2},
-    {x: 2, y: 9},
-    {x: 3, y: 10},
-    {x: 4, y: 15},
-    {x: 5, y: 9},
-    {x: 6, y: 6},
-    {x: 7, y: 3},
-    {x: 8, y: 2},
-    {x: 9, y: 0},
-    {x: 10, y: 3},
-    {x: 11, y: 1}
-];
-
-const dataLastWeek = [
-    {x: 0, y: 3},
-    {x: 1, y: 2},
-    {x: 2, y: 9},
-    {x: 3, y: 10},
-    {x: 4, y: 15},
-    {x: 5, y: 9},
-    {x: 6, y: 6}
-]
-
-const dataLastMonth = [
-    {x: 0, y: 3},
-    {x: 1, y: 2},
-    {x: 2, y: 9},
-    {x: 3, y: 10},
-    {x: 4, y: 15},
-    {x: 5, y: 9},
-    {x: 6, y: 6},
-    {x: 7, y: 3},
-    {x: 8, y: 2},
-    {x: 9, y: 9},
-    {x: 10, y: 10},
-    {x: 11, y: 15},
-    {x: 12, y: 9},
-    {x: 13, y: 3},
-    {x: 14, y: 2},
-    {x: 15, y: 9},
-    {x: 16, y: 10},
-    {x: 17, y: 15},
-    {x: 18, y: 9},
-    {x: 19, y: 3},
-    {x: 20, y: 2},
-    {x: 21, y: 9},
-    {x: 22, y: 10},
-    {x: 23, y: 15},
-    {x: 24, y: 9},
-    {x: 25, y: 6},
-    {x: 26, y: 3},
-    {x: 27, y: 2},
-    {x: 28, y: 9}
-]
-
-
-
-
-
+function seriesGraph(isLineChart, data) {
+    if (isLineChart) {
+        return (<LineSeries data={data}></LineSeries>)
+    }
+    return (<VerticalBarSeries data={data}></VerticalBarSeries>)        
+}
 
 function DownlaodsPlot(props) {
     return (
         <XYPlot height={300} width={600} >
-            <XAxis />
-            <YAxis />
-            <LineSeries data={props.data}></LineSeries>
+            <XAxis title={props.xAxisLabel} />
+            <YAxis title={'Downloads'}/>
+            <HorizontalGridLines />
+            <VerticalGridLines />
+            {seriesGraph(props.isLineChart, props.data)}
         </XYPlot>
     );
 }
 
-function Downloads() {
-    const [dataToShow, setDataToShow] = useState(dataLastMonth);
+const lastDate = new Date();
+const downloadsData = DownloadsData.downloadsData(2000, lastDate)
 
-    function timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod) {
-        setDataToShow(getData(selectedPeriod, selectedSpecificPeriod));
+function Downloads() {
+
+    const chartTypes = ["bar-chart", "line-chart"];
+
+    const initialPeriod = getFullPeriodDateRange("month", lastDate)
+    const [data, setData] = useState(DownloadsData.getGraphingData(downloadsData, initialPeriod[0], initialPeriod[1]));
+    const [selectedDateRange, setSelectedDateRange] = useState(initialPeriod);
+    const [chartType, setChartType] = useState(chartTypes[0]);
+
+
+    function segmentedControlDidChange(newType) {
+        setChartType(newType);
+    }
+
+    function handleSelectedDateRangeDidChange(newDateRange) {
+        console.log(newDateRange);
+        setSelectedDateRange(newDateRange);
+        setData(DownloadsData.getGraphingData(downloadsData, newDateRange[0], newDateRange[1]));
     }
 
     return (
         <div>
             <h1>Downloads</h1>
-            <div>
-                <TimeSelection onChange={(selectedPeriod, selectedSpecificPeriod) => timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod)}/>
+            <div>   
+            <h4>{accumulateValues(data)}</h4>
+            <h4>Delta Component</h4>
+            <h4>{selectedDateRange[0] + ' bis ' + selectedDateRange[1]}</h4>
             </div>
-            <DownlaodsPlot data={dataToShow} />
+            <TimeSelection 
+                selectedDateRange={selectedDateRange}
+                minimumDate={moment(downloadsData[0].date).toDate()}
+                onChange={(newDateRange) => handleSelectedDateRangeDidChange(newDateRange)}
+            />
+            <SegmentedControl controls={chartTypes} selectedControl={chartType} onChange={(e) => segmentedControlDidChange(e)} />
+            <DownlaodsPlot
+                xAxisLabel={"Monat"}
+                isLineChart={chartType == chartTypes[1]}
+                data={data}
+            />
         </div>
     )
 }
@@ -113,16 +76,26 @@ function Downloads() {
 function getData(selectedPeriod, selectedSpecificPeriod) {
     switch (selectedPeriod) {
         case "Woche":
-            return dataLastWeek;
+            return DownloadsData.downloadsData(7);
         case "Monat":
-            return dataLastMonth;
+            return DownloadsData.downloadsData(30);
         case "Jahr":
-            return data2020;
+            return DownloadsData.downloadsData(365);
         case "Gesamt":
-            return data2019;
+            return DownloadsData.downloadsData(690);
         default:
             break;
     }
+}
+
+function accumulateValues(data) {
+    console.log(data);
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+        console.log(data[i])
+        sum += data[i].y
+    }
+    return sum;
 }
 
 export default Downloads;

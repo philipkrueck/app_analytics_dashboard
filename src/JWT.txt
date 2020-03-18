@@ -1,0 +1,26 @@
+-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENQmQzmRfxu+lROXN33Mr15o8qiAe
+a8CnIwSJvoA8084Wd11XwtykcedbxgYdc7Jzwcuh3U0yFbqW1mclHp9yKQ==
+-----END PUBLIC KEY-----
+
+
+-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENQmQzmRfxu+lROXN33Mr15o8qiAe
+a8CnIwSJvoA8084Wd11XwtykcedbxgYdc7Jzwcuh3U0yFbqW1mclHp9yKQ==
+-----END PUBLIC KEY-----
+
+
+Header:
+{
+"alg": "ES256",
+"kid": "VH9VS5CX2S",
+"typ": "JWT"
+}
+
+
+Payload:
+{
+"iss": "69a6de76-9d50-47e3-e053-5b8c7c11a4d1",
+"exp": 1528408800,
+"aud": "appstoreconnect-v1"
+}

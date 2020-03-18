@@ -1,68 +1,53 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState} from 'react';
+import Calendar from 'react-calendar';
+import moment from 'moment';
+import 'react-calendar/dist/Calendar.css';
+import Selection from './Selection'
 
-function Selection(props) {
-    function handleSelectTimeDurationDidChange(e) {
-        props.onChange(e.target.value);
+const periodOptions = ["week", "month", "year"];
+const calendarPeriodOptions = ["week", "month", "year", "decade"];
+
+export default function TimeSelection(props) {
+
+    const [selectedPeriodIndex, setSelectedPeriodIndex] = useState(1);
+
+    function handlePeriodSelectionDidChange(newValue) {
+        const pos = periodOptions.findIndex(i => i === newValue);
+        setSelectedPeriodIndex(pos);
+        props.onChange(getFullPeriodDateRange(periodOptions[pos], props.selectedDateRange[0]));
     }
 
-    return ( 
-        <select onChange={handleSelectTimeDurationDidChange} defaultValue={props.selectedOption}>
-            { props.options.map((option) => {
-                return (<option key={option}>{option}</option>)
-            })}
-        </select>
-    );
-}
-
-function TimeSelection(props) {
-    const periodOptions = ["Woche", "Monat", "Jahr", "Gesamt"];
-    const [selectedPeriod, setSelectedPeriod] = useState(periodOptions[1]);
-
-    const [specificPeriodOptions, setSpecificPeriodOptions] = useState(getSpecificTimePeriodOptions(selectedPeriod, periodOptions));
-    const [selectedSpecificPeriod, setSelectedSpecificPeriod] = useState(specificPeriodOptions !== null ? specificPeriodOptions[0] : null);
-
-    useEffect(() => {
-        props.onChange(selectedPeriod, selectedSpecificPeriod);
-    });
-    
-
-    function periodSelectionDidChange(newValue) {
-        setSelectedPeriod(newValue);
-        const newSpecificTimePeriodOptions = getSpecificTimePeriodOptions(newValue, periodOptions)
-        setSpecificPeriodOptions(newSpecificTimePeriodOptions);
-        setSelectedSpecificPeriod(newSpecificTimePeriodOptions !== null ? newSpecificTimePeriodOptions[0] : null)
-    }
-
-    function specificPeriodSelectionDidChange(newValue) {
-        setSelectedSpecificPeriod(newValue);
-    }
-
-    function specificPeriodSelection() {
-        if (selectedSpecificPeriod !== null) {
-            return ( <Selection selectedOption={selectedSpecificPeriod} options={specificPeriodOptions} onChange={(newValue) => specificPeriodSelectionDidChange(newValue)}/>);
-        }
-        return null;
+    function handleCalendarDateSelectionDidChange(newValue) {
+        props.onChange(getFullPeriodDateRange(periodOptions[selectedPeriodIndex], newValue));
     }
 
     return (
         <div>
-            <Selection selectedOption={selectedPeriod} options={periodOptions} onChange={(newValue) => periodSelectionDidChange(newValue)}/>
-            { specificPeriodSelection() }
+            <Selection options={periodOptions} selectedOption={periodOptions[selectedPeriodIndex]} onChange={(newValue) => handlePeriodSelectionDidChange(newValue)} />
+            <Calendar 
+                value = {props.selectedDateRange}
+                minDate={props.minimumDate}
+                maxDate={new Date()}
+                maxDetail={calendarPeriodOptions[selectedPeriodIndex+1]}
+                minDetail={calendarPeriodOptions[selectedPeriodIndex+1]} 
+                selectRange={false}
+                showWeekNumbers={true}
+                onChange={(date) => handleCalendarDateSelectionDidChange(date)}
+            />
         </div>
     )
 }
 
-function getSpecificTimePeriodOptions(selectedTimePeriod, timePeriodOptions) {
-    switch (selectedTimePeriod) {
-        case timePeriodOptions[0]:
-            return ["Woche 1", "Woche 2", "Woche 3", "Woche 4", "Woche 5", "Woche 6"];
-        case timePeriodOptions[1]: 
-            return ["Monat 1", "Monat 2", "Monat 3", "Monat 4", "Monat 5", "Monat 6", "Monat 7"];
-        case timePeriodOptions[2]:
-            return ["2019", "2020"];
-        default: 
-            return null;
+export function getFullPeriodDateRange(periodType, date) {
+    if (!periodOptions.includes(periodType)) {
+        return null;
     }
+    const momentDate = moment(date);
+    if (periodType === "week") {
+        return [momentDate.startOf('isoWeek').toDate(), momentDate.endOf("isoWeek").toDate()]
+    }
+    return [momentDate.startOf(periodType).toDate(), momentDate.endOf(periodType).toDate()];
 }
 
-export default TimeSelection;
+
+
