@@ -92,7 +92,7 @@ function Dashboard() {
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Ranking</h4>
-                        <img src={IconRanking} alt={""}>></img>
+                        <img src={IconRanking} alt={""}></img>
                         <button class={"DashboardButton"} value={pages[4]} onClick={handleSelectionChange}></button>
                         <p>267</p>
                     </div>
