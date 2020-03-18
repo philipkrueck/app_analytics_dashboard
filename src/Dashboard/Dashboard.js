@@ -16,10 +16,12 @@ import StarComponent from '../General/StarComponent'
 function Dashboard() {
     const pages = ["Downloads", "Bewertungen", "Aktive Nutzer", "Nutzerverhalten", "Ranking", "In-App-Purchases", "Dashboard"];
     const [selectedPage, setSelectedPage] = useState(pages[6]);
-    const DummyDataDownloads = ["64582438", "97346328", "836276", "99732544"];
-    const shuffledDownloads = DummyDataDownloads[Math.floor(Math.random()*DummyDataDownloads.length)];
-    const DummyDataActiveUsers = ["8732 WAU", "1000 WAU", "733 WAU"];
-    const shuffledActiveUsers = DummyDataActiveUsers[Math.floor(Math.random()*DummyDataActiveUsers.length)];
+
+    const downloads = [64582438, 68582438];
+    const activeUsers = [8732, 8332];
+    const stars = [4.5, 4.3]
+    const inAppPurchases = [659.73, 892.09]
+
     const DummyDataInAppPurchases = ["659,73 €", "892,09 €", "9922,81 €"];
     const shuffledInAppPurchases = DummyDataInAppPurchases[Math.floor(Math.random()*DummyDataInAppPurchases.length)];
     const DummyDataStars = ["3.66", "3.84", "4.09", "4.45"];
@@ -65,23 +67,26 @@ function Dashboard() {
                         <img src={IconDownload} alt={""}></img>
                         <button class={"DashboardButton"} value={pages[0]} onClick={handleSelectionChange}></button>
                         <div class={"DeltaComponent"} id="delta-component">
-                            <p>{shuffledDownloads}</p>
-                            <DeltaComponent percentageValue={shuffledStars}/>
+                            <p>{downloads[0]}</p>
+                            <DeltaComponent newValue={downloads[0]} oldValue={downloads[1]}/>
                         </div>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Bewertung</h4>
-                        <StarComponent percentageStars={shuffledStars}/>
+                        <StarComponent percentageStars={stars[0]}/>
                         <button class={"DashboardButton"} value={pages[1]} onClick={handleSelectionChange}></button>
-                        <p>{shuffledStars} Sterne</p>
+                        <div class={"DeltaComponent"} id="delta-component">
+                            <p>{stars[0]} Sterne</p>
+                            <DeltaComponent newValue={stars[0]} oldValue={stars[1]}/>
+                        </div>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Aktive Nutzer</h4>
                         <img src={IconAktiveBenutzer} alt={""}></img>
                         <button class={"DashboardButton"} value={pages[2]} onClick={handleSelectionChange}></button>
                         <div class={"DeltaComponent"} id="delta-component">
-                            <p>{shuffledActiveUsers}</p>
-                            <DeltaComponent percentageValue={-1.2}/>
+                            <p>{activeUsers[0] + " WAU"}</p>
+                            <DeltaComponent newValue={activeUsers[0]} oldValue={activeUsers[1]}/>
                         </div>
                     </div>
                     <div class={"DashboardKPI"} >
@@ -101,8 +106,8 @@ function Dashboard() {
                         <img src={IconInAppPurchases} alt={""}></img>
                         <button class={"DashboardButton"} value={pages[5]} onClick={handleSelectionChange}></button>
                         <div class={"DeltaComponent"} id="delta-component">
-                            <p>{shuffledInAppPurchases}</p>
-                            <DeltaComponent percentageValue={0.0}/>
+                            <p>{inAppPurchases[0] + "€"}</p>
+                            <DeltaComponent newValue={inAppPurchases[0]} oldValue={inAppPurchases[1]}/>
                         </div>
                     </div>
                 </div>

@@ -109,7 +109,7 @@ function ActiveUsers() {
                     </div>
                     <div class={"ActiveUsersDeltaComponent"}>
                         <p>763 DAU</p>
-                        <DeltaComponent percentageValue={0.01} />
+                        <DeltaComponent oldValue={730} newValue={763} />
                     </div>
                 </div>
                 <div className={"ActiveUsers"}>
@@ -118,7 +118,7 @@ function ActiveUsers() {
                     </div>
                     <div class={"ActiveUsersDeltaComponent"}>
                         <p>93276 WAU</p>
-                        <DeltaComponent percentageValue={1.3} />
+                        <DeltaComponent oldValue={98300} newValue={93276} />
                     </div>
                 </div>
                 <div className={"ActiveUsers"}>
@@ -127,7 +127,7 @@ function ActiveUsers() {
                     </div>
                     <div class={"ActiveUsersDeltaComponent"}>
                         <p>7321641 MAU</p>
-                        <DeltaComponent percentageValue={-0.61} />
+                        <DeltaComponent newValue={7321641} oldValue={7621641}/>
                     </div>
                 </div>
             </div>
