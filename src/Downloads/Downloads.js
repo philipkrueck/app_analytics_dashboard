@@ -4,6 +4,7 @@ import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines
 import TimeSelection from '../General/TimeSelection';
 import SegmentedControl from '../General/SegmentedControl'
 import * as DownloadsData from "./DownloadsData";
+import * as DateConversion from '../General/DateConversion'
 
 function seriesGraph(configuration) {
     switch (configuration.selectedChartType) {
@@ -26,6 +27,9 @@ function DownlaodsPlot(props) {
     );
 }
 
+const periodOptions = ["week", "month", "year"];
+const calendarPeriodOptions = ["week", "month", "year", "decade"];
+
 function Downloads() {
 
     const [chartConfiguration, setChartConfiguration] = useState({
@@ -43,6 +47,14 @@ function Downloads() {
             xAxisLabel: "Monat"
         })
     }
+
+    const [selectedTimePeriodIndex, setSelctedTimePeriodIndex] = useState(1);
+    const [selectedDateRange, setSelectedDateRange] = useState(DateConversion.getFullPeriodDateRange(periodOptions[selectedTimePeriodIndex], periodOptions, new Date()));
+
+    function handleTimeSelectionDidChange() {
+        console.log("Time Selection did change")
+    }
+
     return (
         <div>
             <h1>Downloads</h1>
@@ -51,7 +63,12 @@ function Downloads() {
             <h4>Delta Component</h4>
             <h4>Zeitraum</h4>
             </div>
-            <TimeSelection />
+            <TimeSelection 
+                periodOptions={periodOptions}
+                calendarPeriodOptions={calendarPeriodOptions} 
+                selectedPeriodIndex={selectedTimePeriodIndex}
+                onChange={() => handleTimeSelectionDidChange()}
+            />
             <SegmentedControl controls={chartConfiguration.chartTypes} selectedControl={chartConfiguration.selectedChartType} onChange={(e) => segmentedControlDidChange(e)} />
             <DownlaodsPlot chartConfiguration={chartConfiguration} />
         </div>
