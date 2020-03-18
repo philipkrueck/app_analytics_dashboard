@@ -3,8 +3,7 @@ import '../../node_modules/react-vis/dist/style.css';
 import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries} from 'react-vis';
 import TimeSelection from '../General/TimeSelection';
 import SegmentedControl from '../General/SegmentedControl'
-import * as DownloadsData from './DownloadData'
-import { dataLastWeek } from './DownloadData';
+import * as DownloadsData from "./DownloadsData";
 
 function seriesGraph(configuration) {
     switch (configuration.selectedChartType) {
@@ -30,20 +29,11 @@ function DownlaodsPlot(props) {
 function Downloads() {
 
     const [chartConfiguration, setChartConfiguration] = useState({
-        data: DownloadsData.data2019,
+        data: DownloadsData.sampleDataSet,
         chartTypes: ["bar-chart", "line-chart"],
         selectedChartType: "line-chart", 
         xAxisLabel: "Monat"
     });
-
-    function timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod) {
-        setChartConfiguration({
-            data: getData(selectedPeriod, selectedSpecificPeriod),
-            chartTypes: chartConfiguration.chartTypes,
-            selectedChartType: chartConfiguration.selectedChartType, 
-            xAxisLabel: selectedPeriod
-        })
-    }
 
     function segmentedControlDidChange(newType) {
         setChartConfiguration({
@@ -71,13 +61,13 @@ function Downloads() {
 function getData(selectedPeriod, selectedSpecificPeriod) {
     switch (selectedPeriod) {
         case "Woche":
-            return DownloadsData.dataLastWeek;
+            return DownloadsData.downloadsData(7);
         case "Monat":
-            return DownloadsData.dataLastMonth;
+            return DownloadsData.downloadsData(30);
         case "Jahr":
-            return DownloadsData.data2020;
+            return DownloadsData.downloadsData(365);
         case "Gesamt":
-            return DownloadsData.data2019;
+            return DownloadsData.downloadsData(690);
         default:
             break;
     }
