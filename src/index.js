@@ -7,7 +7,7 @@ import Dashboard from './Dashboard/Dashboard';
 
 function App() {
   return (
-    <Downloads />
+    <Dashboard />
   );
 }
 

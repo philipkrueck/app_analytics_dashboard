@@ -2,75 +2,73 @@ import React, { useState } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
 import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries} from 'react-vis';
 import TimeSelection from '../General/TimeSelection';
-import SegmentedControl from '../General/SegmentedControl'
+import {getFullPeriodDateRange} from '../General/TimeSelection';
+import SegmentedControl from '../General/SegmentedControl';
 import * as DownloadsData from "./DownloadsData";
-import * as DateConversion from '../General/DateConversion'
+import moment from 'moment';
 
-function seriesGraph(configuration) {
-    switch (configuration.selectedChartType) {
-        case "bar-chart":
-            return (<VerticalBarSeries data={configuration.data}></VerticalBarSeries>)
-        case "line-chart":
-            return (<LineSeries data={configuration.data}></LineSeries>)
+
+function seriesGraph(isLineChart, data) {
+    if (isLineChart) {
+        return (<LineSeries data={data}></LineSeries>)
     }
+    return (<VerticalBarSeries data={data}></VerticalBarSeries>)        
 }
 
 function DownlaodsPlot(props) {
     return (
         <XYPlot height={300} width={600} >
-            <XAxis title={props.chartConfiguration.xAxisLabel} />
+            <XAxis title={props.xAxisLabel} />
             <YAxis title={'Downloads'}/>
             <HorizontalGridLines />
             <VerticalGridLines />
-            {seriesGraph(props.chartConfiguration)}
+            {seriesGraph(props.isLineChart, props.data)}
         </XYPlot>
     );
 }
 
-const periodOptions = ["week", "month", "year"];
-const calendarPeriodOptions = ["week", "month", "year", "decade"];
+const lastDate = new Date();
+const downloadsData = DownloadsData.downloadsData(5000, lastDate)
 
 function Downloads() {
 
-    const [chartConfiguration, setChartConfiguration] = useState({
-        data: DownloadsData.sampleDataSet,
-        chartTypes: ["bar-chart", "line-chart"],
-        selectedChartType: "line-chart", 
-        xAxisLabel: "Monat"
-    });
+    const chartTypes = ["bar-chart", "line-chart"];
+
+    const initialPeriod = getFullPeriodDateRange("month", lastDate)
+    const [data, setData] = useState(DownloadsData.getGraphingData(downloadsData, initialPeriod[0], initialPeriod[1]));
+    const [selectedDateRange, setSelectedDateRange] = useState(initialPeriod);
+    const [chartType, setChartType] = useState(chartTypes[0]);
+
 
     function segmentedControlDidChange(newType) {
-        setChartConfiguration({
-            data: chartConfiguration.data,
-            chartTypes: chartConfiguration.chartTypes,
-            selectedChartType: newType,
-            xAxisLabel: "Monat"
-        })
+        setChartType(newType);
     }
 
-    const [selectedTimePeriodIndex, setSelctedTimePeriodIndex] = useState(1);
-    const [selectedDateRange, setSelectedDateRange] = useState(DateConversion.getFullPeriodDateRange(periodOptions[selectedTimePeriodIndex], periodOptions, new Date()));
-
-    function handleTimeSelectionDidChange() {
-        console.log("Time Selection did change")
+    function handleSelectedDateRangeDidChange(newDateRange) {
+        console.log(newDateRange);
+        setSelectedDateRange(newDateRange);
+        setData(DownloadsData.getGraphingData(downloadsData, newDateRange[0], newDateRange[1]));
     }
 
     return (
         <div>
             <h1>Downloads</h1>
             <div>   
-            <h4>{accumulateValues(chartConfiguration.data)}</h4>
+            <h4>{accumulateValues(data)}</h4>
             <h4>Delta Component</h4>
-            <h4>Zeitraum</h4>
+            <h4>{selectedDateRange[0] + ' bis ' + selectedDateRange[1]}</h4>
             </div>
             <TimeSelection 
-                periodOptions={periodOptions}
-                calendarPeriodOptions={calendarPeriodOptions} 
-                selectedPeriodIndex={selectedTimePeriodIndex}
-                onChange={() => handleTimeSelectionDidChange()}
+                selectedDateRange={selectedDateRange}
+                minimumDate={moment(downloadsData[0].date).toDate()}
+                onChange={(newDateRange) => handleSelectedDateRangeDidChange(newDateRange)}
             />
-            <SegmentedControl controls={chartConfiguration.chartTypes} selectedControl={chartConfiguration.selectedChartType} onChange={(e) => segmentedControlDidChange(e)} />
-            <DownlaodsPlot chartConfiguration={chartConfiguration} />
+            <SegmentedControl controls={chartTypes} selectedControl={chartType} onChange={(e) => segmentedControlDidChange(e)} />
+            <DownlaodsPlot
+                xAxisLabel={"Monat"}
+                isLineChart={chartType == chartTypes[1]}
+                data={data}
+            />
         </div>
     )
 }

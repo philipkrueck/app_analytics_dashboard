@@ -18,14 +18,3 @@ export const fullYearDifference = (startDate, endDate) => {
     const [startYear, endYear] = [moment(startDate).year(), moment(endDate).year()];
     return endYear - startYear + 1;
 }
-
-export function getFullPeriodDateRange(periodType, periodOptions, date) {
-    if (!periodOptions.includes(periodType)) {
-        return null;
-    }
-    const momentDate = moment(date);
-    if (periodType === "week") {
-        return [momentDate.startOf('isoWeek').toDate(), momentDate.endOf("isoWeek").toDate()]
-    }
-    return [momentDate.startOf(periodType).toDate(), momentDate.endOf(periodType).toDate()];
-}
