@@ -62,7 +62,7 @@ function Dashboard() {
                     <h2 class={"DashboardHeading"}>Analytics</h2>
                     <div class={"DashboardKPI"} >
                         <h4>Downloads</h4>
-                        <img src={IconDownload}></img>
+                        <img src={IconDownload} alt={""}></img>
                         <button class={"DashboardButton"} value={pages[0]} onClick={handleSelectionChange}></button>
                         <div class={"DeltaComponent"} id="delta-component">
                             <p>{shuffledDownloads}</p>
@@ -77,7 +77,7 @@ function Dashboard() {
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Aktive Nutzer</h4>
-                        <img src={IconAktiveBenutzer}></img>
+                        <img src={IconAktiveBenutzer} alt={""}></img>
                         <button class={"DashboardButton"} value={pages[2]} onClick={handleSelectionChange}></button>
                         <div class={"DeltaComponent"} id="delta-component">
                             <p>{shuffledActiveUsers}</p>
@@ -86,19 +86,19 @@ function Dashboard() {
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Nutzerverhalten</h4>
-                        <img src={IconNutzerverhalten}></img>
+                        <img src={IconNutzerverhalten} alt={""}></img>
                         <button class={"DashboardButton"} value={pages[3]} onClick={handleSelectionChange}></button>
                         <p>3h 47min</p>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>Ranking</h4>
-                        <img src={IconRanking}></img>
+                        <img src={IconRanking} alt={""}>></img>
                         <button class={"DashboardButton"} value={pages[4]} onClick={handleSelectionChange}></button>
                         <p>267</p>
                     </div>
                     <div class={"DashboardKPI"} >
                         <h4>In-App Purchases</h4>
-                        <img src={IconInAppPurchases}></img>
+                        <img src={IconInAppPurchases} alt={""}></img>
                         <button class={"DashboardButton"} value={pages[5]} onClick={handleSelectionChange}></button>
                         <div class={"DeltaComponent"} id="delta-component">
                             <p>{shuffledInAppPurchases}</p>
