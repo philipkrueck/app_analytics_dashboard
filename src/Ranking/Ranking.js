@@ -106,7 +106,7 @@ function Ranking() {
                 <div className={"ActiveUsersGraph"}><DownlaodsPlot data={dataToShow} /></div>
                 <div className={"ActiveUsers"}>
                     <div class={"IconRanking"}>
-                        <img src={IconRanking} />
+                        <img src={IconRanking} alt={""}></img>
                         <div class={"RankingInImage1"}>16</div>
                         <div class={"RankingInImage2"}><DeltaComponent percentageValue={1} /></div>
                     </div>
@@ -116,7 +116,7 @@ function Ranking() {
                 </div>
                 <div className={"ActiveUsers"}>
                     <div class={"IconRanking"}>
-                        <img src={IconRanking} />
+                        <img src={IconRanking} alt={""}></img> 
                         <div class={"RankingInImage1"}>45</div>
                         <div class={"RankingInImage2"}><DeltaComponent percentageValue={-1} /></div>
                     </div>
@@ -126,7 +126,7 @@ function Ranking() {
                 </div>
                 <div className={"ActiveUsers"}>
                     <div class={"IconRanking"}>
-                        <img src={IconRanking} />
+                        <img src={IconRanking} alt={""}></img> 
                         <div class={"RankingInImage1"}>29</div>
                         <div class={"RankingInImage2"}><DeltaComponent percentageValue={3} /></div>
                     </div>

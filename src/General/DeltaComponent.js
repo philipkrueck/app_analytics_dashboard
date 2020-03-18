@@ -7,21 +7,21 @@ export default function DeltaComponent(props) {
     if(props.percentageValue === 0) {
         return (
             <div>
-                <p><img src={IconDeltaNeutral}></img></p>
+                <p><img src={IconDeltaNeutral} alt={""}></img></p>
                 <p>{props.percentageValue}</p>
             </div>
         )     
     } else if(props.percentageValue < 0) {
         return (
             <div>
-                <p><img src={IconDeltaNeg}></img></p>
+                <p><img src={IconDeltaNeg} alt={""}></img></p>
                 <p>{props.percentageValue}</p>
             </div>
         )
     }
     return (
         <div>
-            <p><img src={IconDeltaPos}></img></p>
+            <p><img src={IconDeltaPos} alt={""}></img></p>
             <p>{props.percentageValue}</p>
         </div>
     )
