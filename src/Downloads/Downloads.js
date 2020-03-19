@@ -50,11 +50,10 @@ function Downloads() {
     }
 
     return (
-        <div>
+        <div class={"DownloadPage"}>
             <h1>Downloads</h1>
-            <div>
+            <div class={"DownloadPageSubtitle"}>
             <DownloadsDelta selectedDateRange={selectedDateRange} currentData={data}/>
-
             <SelectedPeriodLabel startDate={selectedDateRange[0]} endDate={selectedDateRange[1]}/>
             </div>
             <TimeSelection 
@@ -81,8 +80,8 @@ function DownloadsDelta(props) {
 
 
     return (
-        <div class={"DeltaComponent"} id="delta-component">
-            <h3>{currentPeriodDownloads}</h3>
+        <div class={"DownloadsDeltaComponent"} id="delta-component">
+            <p>{currentPeriodDownloads}</p>
             <DeltaComponent newValue={currentPeriodDownloads} oldValue={previousPeriodDownloads}/>
         </div>
     )
@@ -92,7 +91,10 @@ function SelectedPeriodLabel(props) {
     const startDate = moment(props.startDate).format("DD.MM.YYYY");
     const endDate = moment(props.endDate).format("DD.MM.YYYY");
     return (
-        <h4>{startDate + " bis " + endDate}</h4>
+        <div>
+            <p> | {startDate + " bis " + endDate}</p>
+        </div>
+        
     );
 }
 
