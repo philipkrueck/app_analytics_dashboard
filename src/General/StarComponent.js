@@ -6,7 +6,7 @@ import IconBewertung50 from './images/Bewertung - 50.svg'
 import IconBewertung25 from './images/Bewertung - 25.svg'
 
 export default function StarComponent(props) {
-    if(props.percentageStars > 3.5 && props.percentageStars < 3.75) {
+    if(props.stars > 3.5 && props.stars < 3.75) {
         return (
             <div class={"sternebewertung"}>
                 <img src={IconBewertungFull} alt={""}></img>
@@ -16,7 +16,7 @@ export default function StarComponent(props) {
                 <img src={IconBewertungNone} alt={""}></img>
             </div>
         )     
-    } else if(props.percentageStars > 3.75 && props.percentageStars < 4) {
+    } else if(props.stars > 3.75 && props.stars < 4) {
         return (
             <div class={"sternebewertung"}>
                 <img src={IconBewertungFull} alt={""}></img>
@@ -26,7 +26,7 @@ export default function StarComponent(props) {
                 <img src={IconBewertungNone} alt={""}></img>
             </div>
         )
-    } else if(props.percentageStars > 4 && props.percentageStars < 4.25) {
+    } else if(props.stars > 4 && props.stars < 4.25) {
         return (
             <div class={"sternebewertung"}>
                 <img src={IconBewertungFull} alt={""}></img>
@@ -36,7 +36,7 @@ export default function StarComponent(props) {
                 <img src={IconBewertungNone} alt={""}></img>
             </div>
         )
-    } else if(props.percentageStars > 4.25 && props.percentageStars < 4.5) {
+    } else if(props.stars > 4.25 && props.stars < 4.5) {
         return (
             <div class={"sternebewertung"}>
                 <img src={IconBewertungFull} alt={""}></img>

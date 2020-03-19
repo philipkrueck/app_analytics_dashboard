@@ -4,7 +4,7 @@ export const reviewData = [
     {
         stars: 4.5,
         date: Date(2020, 1, 2), 
-        username: 'philipkrueck',
+        username: 'petergriffin',
         title: 'Stabile App', 
         text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,'
     }, 
@@ -89,3 +89,54 @@ export const reviewData = [
 
 // format("dddd, Do")
 
+export const averageStars = (reviewData) => {
+    let sum = 0;
+    reviewData.forEach((review) => {
+        sum += review.stars
+    });
+    return sum / reviewData.length;
+}
+
+export const sortReviewsNewestFirst = (reviewData) => {
+    return reviewData.sort((a, b) => {
+        if (a.date > b.date) {
+            return 1
+        } else if (a.date == b.date) {
+            return 0
+        }
+        return -1
+    });
+}
+
+export const sortReviewsOldestFirst = (reviewData) => {
+    return reviewData.sort((a, b) => {
+        if (a.date < b.date) {
+            return 1
+        } else if (a.date == b.date) {
+            return 0
+        }
+        return -1
+    });
+}
+
+export const sortReviewsPositiveFirst = (reviewData) => {
+    return reviewData.sort((a, b) => {
+        if (a.stars > b.stars) {
+            return 1
+        } else if (a.reviews === b.date) {
+            return 0
+        }
+        return -1
+    });
+}
+
+export const sortReviewsNegativeFirst = (reviewData) => {
+    return reviewData.sort((a, b) => {
+        if (a.stars < b.stars) {
+            return 1
+        } else if (a.reviews === b.date) {
+            return 0
+        }
+        return -1
+    });
+}
