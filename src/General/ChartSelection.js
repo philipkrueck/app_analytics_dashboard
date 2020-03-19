@@ -6,9 +6,7 @@ export default function ChartSelection(props) {
         barChart: "bar"
     };
 
-    console.log(props.lineChartIsSelected);
     const selectedChartType = props.lineChartIsSelected ? chartTypes.lineChart : chartTypes.barChart;
-    console.log(selectedChartType);
 
     function handleSelectionDidChange(e) {
         props.onSelectionChange(e.target.value == chartTypes.lineChart);
