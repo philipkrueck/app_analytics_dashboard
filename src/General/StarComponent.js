@@ -6,54 +6,35 @@ import IconBewertung50 from './images/Bewertung - 50.svg'
 import IconBewertung25 from './images/Bewertung - 25.svg'
 
 export default function StarComponent(props) {
-    if(props.stars > 3.5 && props.stars < 3.75) {
-        return (
-            <div class={"sternebewertung"}>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertung50} alt={""}></img>
-                <img src={IconBewertungNone} alt={""}></img>
-            </div>
-        )     
-    } else if(props.stars > 3.75 && props.stars < 4) {
-        return (
-            <div class={"sternebewertung"}>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertung75} alt={""}></img>
-                <img src={IconBewertungNone} alt={""}></img>
-            </div>
-        )
-    } else if(props.stars > 4 && props.stars < 4.25) {
-        return (
-            <div class={"sternebewertung"}>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungNone} alt={""}></img>
-            </div>
-        )
-    } else if(props.stars > 4.25 && props.stars < 4.5) {
-        return (
-            <div class={"sternebewertung"}>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertungFull} alt={""}></img>
-                <img src={IconBewertung25} alt={""}></img>
-            </div>
-        )
-    } 
+    // convert stars to array 
+    // e.g. 3.5 => [Full, Full, Full, Icon50, IconNone]
+    console.log(props.stars);
+    let imageNames = [];
+    for (let i = 1; i <= 5; i++) {
+        if (props.stars >= i) {
+            imageNames.push(IconBewertungFull)
+        } else if (props.stars < i && props.stars > i-1) {
+            const decimal = props.stars - i + 1
+            if (decimal < 0.33) {
+                imageNames.push(IconBewertung25);
+            } else if (decimal < 0.66) {
+                imageNames.push(IconBewertung50);
+            } else {
+                imageNames.push(IconBewertung75);
+            }
+        } else {
+            imageNames.push(IconBewertungNone)
+        }
+    }
+
+
     return (
-        <div class={"sternebewertung"}>
-            <img src={IconBewertungNone} alt={""}></img>
-            <img src={IconBewertungNone} alt={""}></img>
-            <img src={IconBewertungNone} alt={""}></img>
-            <img src={IconBewertungNone} alt={""}></img>
-            <img src={IconBewertungNone} alt={""}></img>
-        </div>
+        <div className={"sternebewertung"}>
+                <img src={imageNames[0]} alt={""}></img>
+                <img src={imageNames[1]} alt={""}></img>
+                <img src={imageNames[2]} alt={""}></img>
+                <img src={imageNames[3]} alt={""}></img>
+                <img src={imageNames[4]} alt={""}></img>
+            </div>
     )
 }

@@ -40,7 +40,7 @@ function Reviews() {
 function Review(props) {
     return (
         <div>
-            <StarComponent stars={props.stars}/>
+            <StarComponent stars={props.review.stars}/>
             <p>{props.review.date + " von " + props.review.username}</p>
             <h3>{props.review.title}</h3>
             <p>{props.review.text}</p>

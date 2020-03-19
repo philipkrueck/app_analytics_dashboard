@@ -100,7 +100,7 @@ export const formatGraphingDataWithYearsScaling = (relevantData) => {
 
     relevantData.forEach((dataPoint) => {
         currentYear = moment(dataPoint.date).year();
-        if (currentYear != previousYear) {
+        if (currentYear !== previousYear) {
             currentIndex += 1;
         }
         yearlyDownloads[currentIndex] += dataPoint.downloads;
