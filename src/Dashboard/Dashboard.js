@@ -16,7 +16,6 @@ function Dashboard(props) {
     const inAppPurchases = [659.73, 892.09]
 
     function didSelectTile(e) {
-        console.log(e.target.value);
         props.didChangeSelection(e.target.value)
     }
 

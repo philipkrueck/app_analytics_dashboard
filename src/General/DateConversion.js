@@ -18,3 +18,13 @@ export const fullYearDifference = (startDate, endDate) => {
     const [startYear, endYear] = [moment(startDate).year(), moment(endDate).year()];
     return endYear - startYear + 1;
 }
+
+export const periodDifferenceType = (startDate, endDate) => {
+    const daysBetweenDates = daysBetween(moment(startDate), moment(endDate)); 
+    if (daysBetweenDates <= 27) {
+        return "week";
+    } else if (daysBetweenDates < 365) {
+        return "month";
+    }
+    return "year";
+}

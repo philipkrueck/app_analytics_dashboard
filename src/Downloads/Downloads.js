@@ -6,6 +6,9 @@ import {getFullPeriodDateRange} from '../General/TimeSelection';
 import SegmentedControl from '../General/SegmentedControl';
 import * as DownloadsData from "./DownloadsData";
 import moment from 'moment';
+import DeltaComponent from '../General/DeltaComponent';
+import { periodDifferenceType } from '../General/DateConversion';
+import ChartSelection from '../General/ChartSelection';
 
 
 function seriesGraph(isLineChart, data) {
@@ -20,8 +23,6 @@ function DownlaodsPlot(props) {
         <XYPlot height={300} width={600} >
             <XAxis title={props.xAxisLabel} />
             <YAxis title={'Downloads'}/>
-            <HorizontalGridLines />
-            <VerticalGridLines />
             {seriesGraph(props.isLineChart, props.data)}
         </XYPlot>
     );
@@ -32,16 +33,14 @@ const downloadsData = DownloadsData.downloadsData(2000, lastDate)
 
 function Downloads() {
 
-    const chartTypes = ["bar-chart", "line-chart"];
-
     const initialPeriod = getFullPeriodDateRange("month", lastDate)
     const [data, setData] = useState(DownloadsData.getGraphingData(downloadsData, initialPeriod[0], initialPeriod[1]));
     const [selectedDateRange, setSelectedDateRange] = useState(initialPeriod);
-    const [chartType, setChartType] = useState(chartTypes[0]);
+    const [isLineChartSelected, setIsLineChartSelected] = useState(true);
 
 
-    function segmentedControlDidChange(newType) {
-        setChartType(newType);
+    function chartSelectionIsLineChartSelected(value) {
+        setIsLineChartSelected(value);
     }
 
     function handleSelectedDateRangeDidChange(newDateRange) {
@@ -53,24 +52,48 @@ function Downloads() {
     return (
         <div>
             <h1>Downloads</h1>
-            <div>   
-            <h4>{accumulateValues(data)}</h4>
-            <h4>Delta Component</h4>
-            <h4>{selectedDateRange[0] + ' bis ' + selectedDateRange[1]}</h4>
+            <div>
+            <DownloadsDelta selectedDateRange={selectedDateRange} currentData={data}/>
+
+            <SelectedPeriodLabel startDate={selectedDateRange[0]} endDate={selectedDateRange[1]}/>
             </div>
             <TimeSelection 
                 selectedDateRange={selectedDateRange}
                 minimumDate={moment(downloadsData[0].date).toDate()}
                 onChange={(newDateRange) => handleSelectedDateRangeDidChange(newDateRange)}
             />
-            <SegmentedControl controls={chartTypes} selectedControl={chartType} onChange={(e) => segmentedControlDidChange(e)} />
+            <ChartSelection lineChartIsSelected={isLineChartSelected} onSelectionChange={(newValue) => chartSelectionIsLineChartSelected(newValue)}/>
             <DownlaodsPlot
                 xAxisLabel={"Monat"}
-                isLineChart={chartType == chartTypes[1]}
+                isLineChart={isLineChartSelected}
                 data={data}
             />
         </div>
     )
+}
+
+function DownloadsDelta(props) {
+    const differenceType = periodDifferenceType(props.selectedDateRange[0], props.selectedDateRange[1]);
+    const previousDateRange = getFullPeriodDateRange(differenceType, moment(props.selectedDateRange[0]).subtract(1, 'd'));
+    const previousData = DownloadsData.getGraphingData(downloadsData, previousDateRange[0], previousDateRange[1]);
+    const previousPeriodDownloads = accumulateValues(previousData);
+    const currentPeriodDownloads = accumulateValues(props.currentData);
+
+
+    return (
+        <div class={"DeltaComponent"} id="delta-component">
+            <h3>{currentPeriodDownloads}</h3>
+            <DeltaComponent newValue={currentPeriodDownloads} oldValue={previousPeriodDownloads}/>
+        </div>
+    )
+}
+
+function SelectedPeriodLabel(props) {
+    const startDate = moment(props.startDate).format("DD.MM.YYYY");
+    const endDate = moment(props.endDate).format("DD.MM.YYYY");
+    return (
+        <h4>{startDate + " bis " + endDate}</h4>
+    );
 }
 
 function getData(selectedPeriod, selectedSpecificPeriod) {
