@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
-import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines} from 'react-vis';
+import {XYPlot, LineSeries, XAxis, YAxis} from 'react-vis';
 import TimeSelection from '../General/TimeSelection';
 import DeltaComponent from '../General/DeltaComponent';
 

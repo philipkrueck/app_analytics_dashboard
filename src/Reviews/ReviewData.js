@@ -1,4 +1,3 @@
-import moment from "moment";
 
 export const reviewData = [
     {
@@ -101,7 +100,7 @@ export const sortReviewsNewestFirst = (reviewData) => {
     return reviewData.sort((a, b) => {
         if (a.date > b.date) {
             return 1
-        } else if (a.date == b.date) {
+        } else if (a.date === b.date) {
             return 0
         }
         return -1
@@ -112,7 +111,7 @@ export const sortReviewsOldestFirst = (reviewData) => {
     return reviewData.sort((a, b) => {
         if (a.date < b.date) {
             return 1
-        } else if (a.date == b.date) {
+        } else if (a.date === b.date) {
             return 0
         }
         return -1

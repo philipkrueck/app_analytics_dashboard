@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 export default function ChartSelection(props) {
     const chartTypes = {
@@ -9,7 +9,7 @@ export default function ChartSelection(props) {
     const selectedChartType = props.lineChartIsSelected ? chartTypes.lineChart : chartTypes.barChart;
 
     function handleSelectionDidChange(e) {
-        props.onSelectionChange(e.target.value == chartTypes.lineChart);
+        props.onSelectionChange(e.target.value === chartTypes.lineChart);
     }
 
     return (

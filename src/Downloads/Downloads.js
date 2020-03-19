@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
-import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries} from 'react-vis';
+import {XYPlot, LineSeries, XAxis, YAxis, VerticalBarSeries} from 'react-vis';
 import TimeSelection from '../General/TimeSelection';
 import {getFullPeriodDateRange} from '../General/TimeSelection';
-import SegmentedControl from '../General/SegmentedControl';
 import * as DownloadsData from "./DownloadsData";
 import moment from 'moment';
 import DeltaComponent from '../General/DeltaComponent';
@@ -96,26 +95,10 @@ function SelectedPeriodLabel(props) {
     );
 }
 
-function getData(selectedPeriod, selectedSpecificPeriod) {
-    switch (selectedPeriod) {
-        case "Woche":
-            return DownloadsData.downloadsData(7);
-        case "Monat":
-            return DownloadsData.downloadsData(30);
-        case "Jahr":
-            return DownloadsData.downloadsData(365);
-        case "Gesamt":
-            return DownloadsData.downloadsData(690);
-        default:
-            break;
-    }
-}
-
 function accumulateValues(data) {
     console.log(data);
     let sum = 0;
     for (let i = 0; i < data.length; i++) {
-        console.log(data[i])
         sum += data[i].y
     }
     return sum;
