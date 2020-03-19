@@ -8,7 +8,6 @@ import IconBewertung25 from './images/Bewertung - 25.svg'
 export default function StarComponent(props) {
     // convert stars to array 
     // e.g. 3.5 => [Full, Full, Full, Icon50, IconNone]
-    console.log(props.stars);
     let imageNames = [];
     for (let i = 1; i <= 5; i++) {
         if (props.stars >= i) {

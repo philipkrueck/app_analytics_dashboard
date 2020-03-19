@@ -56,7 +56,6 @@ export default function Page() {
                     </div>
                 );
             case pages.ranking:
-                console.log('ranking');
                 return (
                     <div>
                         <BackButton onClick={handleBackButtonClick}/>

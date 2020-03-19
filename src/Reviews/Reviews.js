@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import StarComponent from '../General/StarComponent';
 import { reviewData, averageStars, sortReviewsNewestFirst, sortReviewsPositiveFirst, sortReviewsOldestFirst, sortReviewsNegativeFirst } from './ReviewData';
 import Selection from '../General/Selection';
+import moment from 'moment';
 
 const sortingOptions = {
     newest: "Neueste", 
@@ -38,10 +39,11 @@ function Reviews() {
 }
 
 function Review(props) {
+    const formattedDate = moment(props.review.date).format("dddd, MMMM Do YYYY, h:mm");
     return (
         <div>
             <StarComponent stars={props.review.stars}/>
-            <p>{props.review.date + " von " + props.review.username}</p>
+            <p>{formattedDate + " von " + props.review.username}</p>
             <h3>{props.review.title}</h3>
             <p>{props.review.text}</p>
         </div>

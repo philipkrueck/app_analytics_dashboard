@@ -43,7 +43,6 @@ function Downloads() {
     }
 
     function handleSelectedDateRangeDidChange(newDateRange) {
-        console.log(newDateRange);
         setSelectedDateRange(newDateRange);
         setData(DownloadsData.getGraphingData(downloadsData, newDateRange[0], newDateRange[1]));
     }
@@ -96,7 +95,6 @@ function SelectedPeriodLabel(props) {
 }
 
 function accumulateValues(data) {
-    console.log(data);
     let sum = 0;
     for (let i = 0; i < data.length; i++) {
         sum += data[i].y
