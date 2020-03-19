@@ -34,7 +34,7 @@ function Dashboard(props) {
             </div>
             <div class={"DashboardKPI"} >
                 <h4>Bewertung</h4>
-                <StarComponent percentageStars={stars[0]}/>
+                <StarComponent stars={stars[0]}/>
                 <button class={"DashboardButton"} value={pages.reviews} onClick={didSelectTile}></button>
                 <div class={"DeltaComponent"} id="delta-component">
                     <p>{stars[0]} Sterne</p>
