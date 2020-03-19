@@ -13,7 +13,7 @@ function Dashboard(props) {
     const downloads = [64582438, 68582438];
     const activeUsers = [8732, 8332];
     const stars = [4.5, 4.3]
-    const inAppPurchases = [659.73, 892.09]
+    const inAppPurchases = [659.73, 892.09];
 
     function didSelectTile(e) {
         props.didChangeSelection(e.target.value)
@@ -74,13 +74,5 @@ function Dashboard(props) {
         </div>
     )
 }
-
-    // return (
-    //     <div>
-    //         {backButton()}
-    //         {getPage()}
-    //     </div>
-    // );
-
 
 export default Dashboard;

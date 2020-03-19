@@ -48,11 +48,11 @@ export const getGraphingData = (data, dateOne, dateTwo) => {
     const scaling = xAxisScalingForDurationInDays(daysBetweenDates);
     const filteredData = filteredDataWithRelevantDates(data, momentDateOne, momentDateTwo);
 
-    if (scaling == scalingOptions.days) {
+    if (scaling === scalingOptions.days) {
         return formatGraphingDataWithDaysScaling(filteredData);
-    } else if (scaling == scalingOptions.months) {
+    } else if (scaling === scalingOptions.months) {
         return formatGraphingDataWithMonthsScaling(filteredData);
-    } else if (scaling == scalingOptions.years) {
+    } else if (scaling === scalingOptions.years) {
         return formatGraphingDataWithYearsScaling(filteredData);  
     }
     return null;
@@ -78,7 +78,7 @@ export const formatGraphingDataWithMonthsScaling = (relevantData) => {
     
     relevantData.forEach((dataPoint) => {
         currentMonth = moment(dataPoint.date).month();
-        if (currentMonth != previousMonth) { 
+        if (currentMonth !== previousMonth) { 
             currentIndex += 1;
         }
         monthlyDownloads[currentIndex] += dataPoint.downloads;
@@ -100,7 +100,7 @@ export const formatGraphingDataWithYearsScaling = (relevantData) => {
 
     relevantData.forEach((dataPoint) => {
         currentYear = moment(dataPoint.date).year();
-        if (currentYear != previousYear) {
+        if (currentYear !== previousYear) {
             currentIndex += 1;
         }
         yearlyDownloads[currentIndex] += dataPoint.downloads;
