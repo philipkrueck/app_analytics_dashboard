@@ -7,6 +7,8 @@ import DeltaComponent from '../General/DeltaComponent';
 import { periodDifferenceType } from '../General/DateConversion';
 import ChartSelection from '../General/ChartSelection';
 import BasicPlot from '../General/BasicPlot';
+import {accumulateValues} from '../General/BasicPlot';
+import SelectedPeriodLabel from '../General/SelectedPeriodLabel';
 
 
 const lastDate = new Date();
@@ -66,25 +68,6 @@ function DownloadsDelta(props) {
             <DeltaComponent newValue={currentPeriodDownloads} oldValue={previousPeriodDownloads}/>
         </div>
     )
-}
-
-function SelectedPeriodLabel(props) {
-    const startDate = moment(props.startDate).format("DD.MM.YYYY");
-    const endDate = moment(props.endDate).format("DD.MM.YYYY");
-    return (
-        <div>
-            <p> | {startDate + " bis " + endDate}</p>
-        </div>
-        
-    );
-}
-
-function accumulateValues(data) {
-    let sum = 0;
-    for (let i = 0; i < data.length; i++) {
-        sum += data[i].y
-    }
-    return sum;
 }
 
 export default Downloads;
