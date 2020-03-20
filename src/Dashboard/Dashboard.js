@@ -33,15 +33,6 @@ function Dashboard(props) {
                 </div>
             </div>
             <div class={"DashboardKPI"} >
-                <h4>Bewertung</h4>
-                <StarComponent stars={stars[0]}/>
-                <button class={"DashboardButton"} value={pages.reviews} onClick={didSelectTile}></button>
-                <div class={"DeltaComponent"} id="delta-component">
-                    <p>{stars[0]} Sterne</p>
-                    <DeltaComponent newValue={stars[0]} oldValue={stars[1]}/>
-                </div>
-            </div>
-            <div class={"DashboardKPI"} >
                 <h4>Aktive Nutzer</h4>
                 <img src={IconAktiveBenutzer} alt={""}></img>
                 <button class={"DashboardButton"} value={pages.activeUsers} onClick={didSelectTile}></button>
@@ -51,10 +42,13 @@ function Dashboard(props) {
                 </div>
             </div>
             <div class={"DashboardKPI"} >
-                <h4>Nutzerverhalten</h4>
-                <img src={IconNutzerverhalten} alt={""}></img>
-                <button class={"DashboardButton"} value={pages.userBehavior} onClick={didSelectTile}></button>
-                <p>3h 47min</p>
+                <h4>In-App Purchases</h4>
+                <img src={IconInAppPurchases} alt={""}></img>
+                <button class={"DashboardButton"} value={pages.inAppPurchases} onClick={didSelectTile}></button>
+                <div class={"DeltaComponent"} id="delta-component">
+                    <p>{inAppPurchases[0] + "€"}</p>
+                    <DeltaComponent newValue={inAppPurchases[0]} oldValue={inAppPurchases[1]}/>
+                </div>
             </div>
             <div class={"DashboardKPI"} >
                 <h4>Ranking</h4>
@@ -63,13 +57,19 @@ function Dashboard(props) {
                 <p>267</p>
             </div>
             <div class={"DashboardKPI"} >
-                <h4>In-App Purchases</h4>
-                <img src={IconInAppPurchases} alt={""}></img>
-                <button class={"DashboardButton"} value={pages.inAppPurchases} onClick={didSelectTile}></button>
+                <h4>Bewertung</h4>
+                <StarComponent stars={stars[0]}/>
+                <button class={"DashboardButton"} value={pages.reviews} onClick={didSelectTile}></button>
                 <div class={"DeltaComponent"} id="delta-component">
-                    <p>{inAppPurchases[0] + "€"}</p>
-                    <DeltaComponent newValue={inAppPurchases[0]} oldValue={inAppPurchases[1]}/>
+                    <p>{stars[0]} Sterne</p>
+                    <DeltaComponent newValue={stars[0]} oldValue={stars[1]}/>
                 </div>
+            </div>
+            <div class={"DashboardKPI"} >
+                <h4>Nutzerverhalten</h4>
+                <img src={IconNutzerverhalten} alt={""}></img>
+                <button class={"DashboardButton"} value={pages.userBehavior} onClick={didSelectTile}></button>
+                <p>3h 47min</p>
             </div>
         </div>
     )
