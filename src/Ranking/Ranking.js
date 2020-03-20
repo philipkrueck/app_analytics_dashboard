@@ -1,109 +1,72 @@
 import React, { useState } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
-import {XYPlot, LineSeries, XAxis, YAxis} from 'react-vis';
+import {XYPlot, LineSeries, XAxis, YAxis, VerticalBarSeries} from 'react-vis';
 import TimeSelection from '../General/TimeSelection';
 import DeltaComponent from '../General/DeltaComponent';
 import IconRanking from '../General/images/Ranking.svg'
+import ChartSelection from '../General/ChartSelection';
+import * as DownloadsData from "../Downloads/DownloadsData";
+import {getFullPeriodDateRange} from '../General/TimeSelection';
+import moment from 'moment';
 
-
-// MARK: constants
-const data2020 = [
-    {x: 0, y: 8},
-    {x: 1, y: 5},
-    {x: 2, y: 4},
-    {x: 3, y: 9},
-    {x: 4, y: 1},
-    {x: 5, y: 7},
-    {x: 6, y: 6},
-    {x: 7, y: 3},
-    {x: 8, y: 2},
-    {x: 9, y: 0},
-    {x: 10, y: 0},
-    {x: 11, y: 0}
-  ];
-
-const data2019 = [
-    {x: 0, y: 3},
-    {x: 1, y: 2},
-    {x: 2, y: 9},
-    {x: 3, y: 10},
-    {x: 4, y: 15},
-    {x: 5, y: 9},
-    {x: 6, y: 6},
-    {x: 7, y: 3},
-    {x: 8, y: 2},
-    {x: 9, y: 0},
-    {x: 10, y: 3},
-    {x: 11, y: 1}
-];
-
-const dataLastWeek = [
-    {x: 0, y: 3},
-    {x: 1, y: 2},
-    {x: 2, y: 9},
-    {x: 3, y: 10},
-    {x: 4, y: 15},
-    {x: 5, y: 9},
-    {x: 6, y: 6}
-]
-
-const dataLastMonth = [
-    {x: 0, y: 3},
-    {x: 1, y: 2},
-    {x: 2, y: 9},
-    {x: 3, y: 10},
-    {x: 4, y: 15},
-    {x: 5, y: 9},
-    {x: 6, y: 6},
-    {x: 7, y: 3},
-    {x: 8, y: 2},
-    {x: 9, y: 9},
-    {x: 10, y: 10},
-    {x: 11, y: 15},
-    {x: 12, y: 9},
-    {x: 13, y: 3},
-    {x: 14, y: 2},
-    {x: 15, y: 9},
-    {x: 16, y: 10},
-    {x: 17, y: 15},
-    {x: 18, y: 9},
-    {x: 19, y: 3},
-    {x: 20, y: 2},
-    {x: 21, y: 9},
-    {x: 22, y: 10},
-    {x: 23, y: 15},
-    {x: 24, y: 9},
-    {x: 25, y: 6},
-    {x: 26, y: 3},
-    {x: 27, y: 2},
-    {x: 28, y: 9}
-]
+function seriesGraph(isLineChart, data) {
+    if (isLineChart) {
+        return (<LineSeries data={data}></LineSeries>)
+    }
+    return (<VerticalBarSeries data={data}></VerticalBarSeries>)        
+}
 
 function DownlaodsPlot(props) {
     return (
-        <XYPlot height={500} width={700} >
-            <XAxis />
-            <YAxis />
-            <LineSeries data={props.data}></LineSeries>
+        <XYPlot height={300} width={600} >
+            <XAxis title={props.xAxisLabel} />
+            <YAxis title={'Downloads'}/>
+            {seriesGraph(props.isLineChart, props.data)}
         </XYPlot>
     );
 }
 
-function Ranking() {
-    const [dataToShow, setDataToShow] = useState(dataLastMonth);
+const lastDate = new Date();
+const downloadsData = DownloadsData.downloadsData(2000, lastDate)
 
-    function timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod) {
-        setDataToShow(getData(selectedPeriod, selectedSpecificPeriod));
+function Ranking() {
+    const initialPeriod = getFullPeriodDateRange("month", lastDate)
+    const [isLineChartSelected, setIsLineChartSelected] = useState(true);
+    const [data, setData] = useState(DownloadsData.getGraphingData(downloadsData, initialPeriod[0], initialPeriod[1]));
+    const [selectedDateRange, setSelectedDateRange] = useState(initialPeriod);
+
+
+    function chartSelectionIsLineChartSelected(value) {
+        setIsLineChartSelected(value);
+    }
+
+    function handleSelectedDateRangeDidChange(newDateRange) {
+        console.log(newDateRange);
+        setSelectedDateRange(newDateRange);
+        setData(DownloadsData.getGraphingData(downloadsData, newDateRange[0], newDateRange[1]));
     }
 
     return (
-        <div>
+        <div class={"AktiveNutzerPage"}>
             <h1>Aktive Nutzer</h1>
             <div>
-                <TimeSelection onChange={(selectedPeriod, selectedSpecificPeriod) => timeSelectionDidChange(selectedPeriod, selectedSpecificPeriod)}/>
+                <TimeSelection 
+                    selectedDateRange={selectedDateRange}
+                    minimumDate={moment(downloadsData[0].date).toDate()}
+                    onChange={(newDateRange) => handleSelectedDateRangeDidChange(newDateRange)}
+                />    
             </div>
             <div>
-                <div className={"ActiveUsersGraph"}><DownlaodsPlot data={dataToShow} /></div>
+                <div className={"ActiveUsersGraph"}>
+                <DownlaodsPlot
+                    xAxisLabel={"Monat"}
+                    isLineChart={isLineChartSelected}
+                    data={data}
+                />
+                </div>
+                <div class={"TimeChartSelection"}>
+                    <ChartSelection lineChartIsSelected={isLineChartSelected} onSelectionChange={(newValue) => chartSelectionIsLineChartSelected(newValue)}/>
+                </div>
                 <div className={"ActiveUsers"}>
                     <div class={"IconRanking"}>
                         <img src={IconRanking} alt={""}></img>
@@ -139,19 +102,5 @@ function Ranking() {
     )
 }
 
-function getData(selectedPeriod, selectedSpecificPeriod) {
-    switch (selectedPeriod) {
-        case "Woche":
-            return dataLastWeek;
-        case "Monat":
-            return dataLastMonth;
-        case "Jahr":
-            return data2020;
-        case "Gesamt":
-            return data2019;
-        default:
-            break;
-    }
-}
 
 export default Ranking;
