@@ -38,18 +38,22 @@ function Downloads() {
                 <DownloadsDelta selectedDateRange={selectedDateRange} currentData={data}/>
                 <SelectedPeriodLabel startDate={selectedDateRange[0]} endDate={selectedDateRange[1]}/>
             </div>
+            <div>
             <TimeSelection 
                 selectedDateRange={selectedDateRange}
                 minimumDate={moment(downloadsData[0].date).toDate()}
                 onChange={(newDateRange) => handleSelectedDateRangeDidChange(newDateRange)}
+                
             />
             <ChartSelection lineChartIsSelected={isLineChartSelected} onSelectionChange={(newValue) => chartSelectionIsLineChartSelected(newValue)}/>
+            </div>
+            <div>
             <BasicPlot
                 xAxisLabel={"Monat"}
                 isLineChart={isLineChartSelected}
                 title={"Downloads"}
                 data={data}
-            />
+            /></div>
         </div>
     )
 }

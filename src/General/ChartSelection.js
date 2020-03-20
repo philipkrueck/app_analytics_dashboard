@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import IconLineChart from '../General/images/Linienchart - blau.svg'
+import IconBarChart from '../General/images/Barchart - blau.svg'
+
 
 export default function ChartSelection(props) {
     const chartTypes = {
@@ -14,26 +17,16 @@ export default function ChartSelection(props) {
 
     return (
         <div>
-            <label key={chartTypes.lineChart}>
-                <input 
-                    type="radio" 
-                    value={chartTypes.lineChart} 
-                    id={chartTypes.lineChart}
-                    checked={chartTypes.lineChart === selectedChartType}
-                    onChange={handleSelectionDidChange}
-                />
-                {chartTypes.lineChart}
-            </label>)
-            <label key={chartTypes.barChart}>
-                <input 
-                    type="radio" 
-                    value={chartTypes.barChart} 
-                    id={chartTypes.barChart}
-                    checked={chartTypes.barChart === selectedChartType}
-                    onChange={handleSelectionDidChange}
-                />
-                {chartTypes.barChart}
-            </label>)
+            <div class={"ChartButton"}>
+                <img src={IconBarChart} alt={""} /> 
+                <button class={"ChartButtonButton"} key={chartTypes.barChart} onClick={handleSelectionDidChange} value={chartTypes.barChart}>
+                bar</button>
+            </div>
+            <div class={"ChartButton"}>
+                <img src={IconLineChart} alt={""} /> 
+                <button class={"ChartButtonButton"} key={chartTypes.lineChart} onClick={handleSelectionDidChange} value={chartTypes.lineChart}>
+                bar</button>
+            </div>
         </div>
     )
 };
