@@ -219,11 +219,10 @@ code {
 }
 
 .ChartButton {
-  margin: 4%;
   border: 1px;
   border-color: black;
-  width: 25%;
-  height: 200px;
+  width: 50px;
+  height: 25px;
   float: left;
   position: relative;
   background: #313131
@@ -251,4 +250,9 @@ code {
   border: none;
   cursor: pointer;
   text-align: center;
+}
+
+.TimeChartSelection {
+  padding-top: 20px;
+  float: left;
 }
