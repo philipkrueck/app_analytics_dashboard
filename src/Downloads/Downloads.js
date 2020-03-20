@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import '../../node_modules/react-vis/dist/style.css';
-import {XYPlot, LineSeries, XAxis, YAxis, VerticalBarSeries} from 'react-vis';
 import TimeSelection from '../General/TimeSelection';
 import {getFullPeriodDateRange} from '../General/TimeSelection';
 import * as DownloadsData from "./DownloadsData";
@@ -8,24 +6,8 @@ import moment from 'moment';
 import DeltaComponent from '../General/DeltaComponent';
 import { periodDifferenceType } from '../General/DateConversion';
 import ChartSelection from '../General/ChartSelection';
+import BasicPlot from '../General/BasicPlot';
 
-
-function seriesGraph(isLineChart, data) {
-    if (isLineChart) {
-        return (<LineSeries data={data}></LineSeries>)
-    }
-    return (<VerticalBarSeries data={data}></VerticalBarSeries>)        
-}
-
-function DownlaodsPlot(props) {
-    return (
-        <XYPlot height={300} width={600} >
-            <XAxis title={props.xAxisLabel} />
-            <YAxis title={'Downloads'}/>
-            {seriesGraph(props.isLineChart, props.data)}
-        </XYPlot>
-    );
-}
 
 const lastDate = new Date();
 const downloadsData = DownloadsData.downloadsData(2000, lastDate)
@@ -51,8 +33,8 @@ function Downloads() {
         <div class={"DownloadPage"}>
             <h1>Downloads</h1>
             <div class={"DownloadPageSubtitle"}>
-            <DownloadsDelta selectedDateRange={selectedDateRange} currentData={data}/>
-            <SelectedPeriodLabel startDate={selectedDateRange[0]} endDate={selectedDateRange[1]}/>
+                <DownloadsDelta selectedDateRange={selectedDateRange} currentData={data}/>
+                <SelectedPeriodLabel startDate={selectedDateRange[0]} endDate={selectedDateRange[1]}/>
             </div>
             <TimeSelection 
                 selectedDateRange={selectedDateRange}
@@ -60,9 +42,10 @@ function Downloads() {
                 onChange={(newDateRange) => handleSelectedDateRangeDidChange(newDateRange)}
             />
             <ChartSelection lineChartIsSelected={isLineChartSelected} onSelectionChange={(newValue) => chartSelectionIsLineChartSelected(newValue)}/>
-            <DownlaodsPlot
+            <BasicPlot
                 xAxisLabel={"Monat"}
                 isLineChart={isLineChartSelected}
+                title={"Downloads"}
                 data={data}
             />
         </div>
