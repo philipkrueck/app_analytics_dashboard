@@ -256,3 +256,45 @@ code {
   padding-top: 20px;
   float: left;
 }
+
+.ReviewPage {
+  width: 85%;
+  height: 100%;
+  padding-left: 15%;
+}
+
+.ReviewPage h1, h3 {
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.ReviewStarComponent {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.ReviewBlock {
+  padding-left: 15px;
+  margin-right: 5%;
+  background: #313131;
+  padding-bottom: 0px;
+}
+
+.ReviewBlock p {
+  text-align: left;
+  margin-top: 0px;
+  font-size: 8px;
+}
+
+.ReviewBlockText h3 {
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.ReviewBlockText p{
+  padding: 15px;
+  padding-top: 0px;
+  padding-left: 0px;
+  font-size: 14px;
+}
