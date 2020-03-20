@@ -298,3 +298,11 @@ code {
   padding-left: 0px;
   font-size: 14px;
 }
+
+.AktiveNutzerPage {
+  padding-left: 15%;
+}
+
+.AktiveNutzerPage h1 {
+  text-align: center;
+}
