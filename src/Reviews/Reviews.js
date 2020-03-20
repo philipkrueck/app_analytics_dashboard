@@ -23,17 +23,22 @@ function Reviews() {
     }
 
     return (
-        <div>
+        <div class={"ReviewPage"}>
             <h1>Bewertung</h1>
             <p>{reviews.length + " Rezensionen | global"}</p>
-            <StarComponent stars={avgStars} />
+            <div class={"ReviewStarComponent"}>
+                <StarComponent stars={avgStars} />
+            </div>
+            
             <h3>{avgStars + " Sterne"}</h3>
-            <Selection options={json2array(sortingOptions)} selectedOption={selectedSortingOption} onChange={(newSortingOption) => handleSortingOptionChanged(newSortingOption)}/>
-            {
-                reviews.map((review) => {
-                    return (<Review key={review.username} review={review} />)
-                })
-            }
+            <div>
+                <Selection options={json2array(sortingOptions)} selectedOption={selectedSortingOption} onChange={(newSortingOption) => handleSortingOptionChanged(newSortingOption)}/>
+                {
+                    reviews.map((review) => {
+                        return (<Review key={review.username} review={review} />)
+                    })
+                }
+            </div>
         </div>
     );
 }
@@ -41,11 +46,13 @@ function Reviews() {
 function Review(props) {
     const formattedDate = moment(props.review.date).format("dddd, MMMM Do YYYY, h:mm");
     return (
-        <div>
+        <div class={"ReviewBlock"}>
             <StarComponent stars={props.review.stars}/>
             <p>{formattedDate + " von " + props.review.username}</p>
-            <h3>{props.review.title}</h3>
-            <p>{props.review.text}</p>
+            <div class={"ReviewBlockText"}>
+                <h3>{props.review.title}</h3>
+                <p>{props.review.text}</p>
+            </div>
         </div>
     )
 
