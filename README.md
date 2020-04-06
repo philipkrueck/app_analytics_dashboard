@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Additional Packages
+### `npm install moment`
+### `npm install react-calendar`
+
 ## Available Scripts
 
 In the project directory, you can run:
