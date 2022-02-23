@@ -1,3 +1,4 @@
+# App Analytics Dashboard
 A React.js project for displaying analytics data about a mobile app.
 
 ## Additional Packages
